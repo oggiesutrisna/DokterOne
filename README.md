@@ -1,4 +1,4 @@
-<p align="center"><a href="#"><img src="https://user-images.githubusercontent.com/40566790/125743825-6fabea4e-d50f-490f-bedd-2f1088718483.png" width="200"></p></a>
+<p align="center"><a href="#"><img src="https://user-images.githubusercontent.com/40566790/125743825-6fabea4e-d50f-490f-bedd-2f1088718483.png" width="300"></p></a>
 
 
 ## About DokterOne
