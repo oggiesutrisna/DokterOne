@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pasien;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\TemplateProcessor;
@@ -17,8 +18,8 @@ class PasienController extends Controller
      */
     public function index()
     {
-        $pasien = Pasien::orderBy('id', 'DESC')->get();
-        return view('pasiens.index', compact('pasien'))->with('i', (request()->input('page', 1) - 1) * 5);
+        $pasien = Pasien::orderBy('id', 'DESC')->paginate(5);
+        return view('pasiens.index', compact('pasien'));
     }
     /**
      * Show the form for creating a new resource.
@@ -111,8 +112,6 @@ class PasienController extends Controller
     }
 
     public function print($pasien) {
-        $PhpWord = new PhpWord();
-        $section = $PhpWord->addsection();
 
         $template = new TemplateProcessor(public_path('result.docx'));
 
@@ -123,10 +122,17 @@ class PasienController extends Controller
         $template->setValue('dob', $pasien->dob);
         $template->setValue('gender', $pasien->gender);
         $template->setValue('sampling_time', $pasien->sampling_time);
+        $template->setValue('nomor_pid', $pasien->nomor_pid);
         $template->setValue('jenis_pemeriksaan', $pasien->jenis_pemeriksaan);
         $template->setValue('nationality', $pasien->nationality);
 
         $content = IOFactory::load($SaveDocPath);
+        $savePdfPath = public_path('new_result.pdf');
+        // exists
+        if ( file_exists($savePdfPath)) {
+            unlink($savePdfPath);
+        }
 
+        $PdfWriter = IOFactory::createWriter($content, '.pdf');
     }
 }
