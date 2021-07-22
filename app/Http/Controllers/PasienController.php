@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePasienRequest;
+use App\Http\Requests\UpdatePasienRequest;
 use App\Models\Pasien;
 use Illuminate\Http\Request;
 
@@ -15,6 +17,7 @@ class PasienController extends Controller
     public function index()
     {
         $pasiens = Pasien::orderBy('id', 'DESC')->paginate(5);
+
         return view('pasiens.index', compact('pasiens'));
     }
     /**
@@ -33,21 +36,11 @@ class PasienController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePasienRequest $request)
     {
-        $request->validate([
-            'nosurat' => 'required|max:255',
-            'nama' => 'required|max:255',
-            'sampling_time' => 'required|max:255',
-            'dob' => 'required|max:255',
-            'nomor_pid' => 'required|max:255',
-            'jenis_kelamin' => 'required|max:255',
-            'nationality' => 'required|max:255',
-            'jenis_pemeriksaan' => 'required|max:255',
-            'result' => 'required|max:255',
-        ]);
         Pasien::create($request->all());
-        return redirect()->route('pasiens.index')->with('sukses', 'Data Pasien Telah Ditambah');
+
+        return redirect()->route('pasiens.index')->with('success', 'Data pasien berhasil ditambahkan!');
     }
 
     /**
@@ -79,20 +72,11 @@ class PasienController extends Controller
      * @param  \App\Models\Pasien  $pasien
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pasien $pasien)
+    public function update(UpdatePasienRequest $request, Pasien $pasien)
     {
-        $request->validate([
-            'nama' => 'required|max:255',
-            'dob' => 'required|max:255',
-            'jenis_kelamin' => 'required|max:255',
-            'jenis_pemeriksaan' => 'required|max:255',
-            'sampling_time' => 'required|max:255',
-            'nomor_pid' => 'required|max:255',
-            'nationality' => 'required|max:255',
-            'result' => 'required|max:255',
-        ]);
         $pasien->update($request->all());
-        return redirect()->route('pasiens.index')->with('sukses', 'data pasien berhasil di update');
+
+        return redirect()->route('pasiens.index')->with('success', 'Data pasien berhasil diubah!');
     }
 
     /**
@@ -104,6 +88,7 @@ class PasienController extends Controller
     public function destroy(Pasien $pasien)
     {
         $pasien->delete();
-        return redirect()->route('pasiens.index')->with('success', 'data pasien telah di hapus');
+
+        return redirect()->route('pasiens.index')->with('success', 'Data pasien berhasil dihapus!');
     }
 }

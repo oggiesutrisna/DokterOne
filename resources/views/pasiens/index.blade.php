@@ -56,6 +56,7 @@
   </div>
   <!-- /.col -->
 </div>
+@include('partials.flash-message')
 <div class="card">
   <div class="card-header">
     Total Data Pasien : {{ $count = DB::table('pasiens')->count(); }}
@@ -103,9 +104,18 @@
           <td>{{ $pasien->jenis_kelamin }}</td>
           <td>{{ $pasien->nationality }}</td>
           <td>{{ $pasien->jenis_pemeriksaan }}</td>
-          <td>{{ $pasien->result }}</td>
-          <td>{{ QrCode::size(100)->generate(route('pasiens.show', $pasien->id)) }}</td>
-          <form action="{{ route('pasiens.destroy', $pasien->id )}}" method="POST">
+          <td>
+            <span class="badge badge-{{ $pasien->result === 'Positive' ? 'danger' : 'success' }} px-3 py-3"
+              data-toggle="tooltip" data-placement="top" title="{{ $pasien->result }}">
+              <i class="fas {{ $pasien->result === 'Positive' ? 'fa-plus-circle' : 'fa-minus-circle' }}"></i>
+            </span>
+          </td>
+          <td>
+            <div class="card px-3 py-3">
+              {{ QrCode::size(100)->generate(route('pasiens.show', $pasien->id)) }}
+            </div>
+          </td>
+          <form action="{{ route('pasiens.destroy', $pasien->id )}}" method="POST" id="form">
             @csrf
             @method('DELETE')
             <td>
@@ -119,7 +129,7 @@
                 <a href="{{route('createPDF', $pasien->id)}}" type="button" class="btn btn-success">
                   <i class="fas fa-print"></i>
                 </a>
-                <button type="submit" class="btn btn-danger">
+                <button type="submit" class="btn btn-danger delete-button">
                   <i class="fas fa-trash"></i>
                 </button>
               </div>

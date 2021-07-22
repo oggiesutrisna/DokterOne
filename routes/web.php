@@ -1,8 +1,7 @@
 <?php
 
-use App\Http\Controllers\CreatePDFController;
 use App\Http\Controllers\PasienController;
-use App\Http\Controllers\PasienScanController;
+use App\Http\Controllers\PDFController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -28,7 +27,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // Route::get('qrpasien', [PasienScanController::class, 'scan']);;
 Route::resource('pasiens', PasienController::class);
 
-Route::get('createPDF/{id}', [CreatePDFController::class, 'createPDF'])->name('createPDF');
+Route::get('createPDF/{id}', [PDFController::class, 'createPDF'])->name('createPDF');
 
 Route::get('/clear-cache', function () {
     Artisan::call('cache:clear');
