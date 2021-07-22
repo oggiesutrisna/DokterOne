@@ -77,6 +77,7 @@
             </div>
         </div>
         <div class="card-footer">
+            <a href="{{ route('pasiens.index') }}" class="btn btn-secondary">Kembali</a>
             <button type="submit" class="btn bg-gradient-primary">Buat Data Pasien</button>
         </div>
         <!-- input states -->
