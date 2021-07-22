@@ -14,8 +14,8 @@ class PasienController extends Controller
      */
     public function index()
     {
-        $pasien = Pasien::orderBy('id', 'DESC')->paginate(5);
-        return view('pasiens.index', compact('pasien'));
+        $pasiens = Pasien::orderBy('id', 'DESC')->paginate(5);
+        return view('pasiens.index', compact('pasiens'));
     }
     /**
      * Show the form for creating a new resource.
