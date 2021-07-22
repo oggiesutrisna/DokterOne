@@ -28,10 +28,6 @@ Route::get('qrpasien', [PasienScanController::class, 'scan']);;
 
 Route::resource('pasiens', PasienController::class);
 
-Route::get('qr-code-gen', function() {
-    QrCode::size(150)->generate('www.unicare-clinic.com');
-});
-
 Route::get('/clear-cache', function() {
     Artisan::call('cache:clear');
     return 'cache is cleared';

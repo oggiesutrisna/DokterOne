@@ -134,5 +134,9 @@ class PasienController extends Controller
         }
 
         $PdfWriter = IOFactory::createWriter($content, '.pdf');
+
+        header("Content-Disposition: Attachment; filename=$pasien->name .'pdf'");
+        $PdfWriter->save("php://output");
+        echo 'kekw';
     }
 }
