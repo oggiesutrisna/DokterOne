@@ -24,11 +24,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// Route::get('qrpasien', [PasienScanController::class, 'scan']);;
 Route::resource('pasiens', PasienController::class);
-Route::get('createPDF/{id}', [PDFController::class, 'createPDF'])->name('createPDF');
 
-Route::get('/clear-cache', function () {
-    Artisan::call('cache:clear');
-    return 'cache is cleared';
-});
+Route::get('createPDF/{id}', PDFController::class)->name('createPDF');
