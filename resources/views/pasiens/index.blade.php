@@ -105,7 +105,7 @@
           <td>{{ $pasien->jenis_pemeriksaan }}</td>
           <td>{{ $pasien->result }}</td>
           <td>{{ QrCode::size(100)->generate(route('pasiens.show', $pasien->id)) }}</td>
-          <form action="{{ route('pasiens.destroy', $pasien->id )}}" method="POST">
+          <form action="{{ route('pasiens.destroy', $pasien->id )}}" method="POST" id="form">
             @csrf
             @method('DELETE')
             <td>
@@ -119,7 +119,7 @@
                 <a href="{{route('createPDF', $pasien->id)}}" type="button" class="btn btn-success">
                   <i class="fas fa-print"></i>
                 </a>
-                <button type="submit" class="btn btn-danger">
+                <button type="submit" class="btn btn-danger delete-button">
                   <i class="fas fa-trash"></i>
                 </button>
               </div>
