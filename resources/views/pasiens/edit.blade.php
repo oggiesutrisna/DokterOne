@@ -52,14 +52,22 @@
                     <div class="form-group">
                         <label>Gender</label>
                         <select class="form-control" name="jenis_kelamin">
-                            <option name="Laki-Laki">Laki-Laki</option>
-                            <option name="Perempuan">Perempuan</option>
+                            <option value="#">Choose One</option>
+                            <option value="Laki-Laki" {{ $pasien->jenis_kelamin === 'Laki-Laki' ? 'selected' : '' }}>
+                                Laki-Laki</option>
+                            <option value="Perempuan" {{ $pasien->jenis_kelamin === 'Perempuan' ? 'selected' : '' }}>
+                                Perempuan</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label>Result</label>
-                        <input type="text" class="form-control" value="{{ $pasien->result }}" name="result"
-                            placeholder="NEGATIVITY / POSITIVITY">
+                        <select class="form-control" name="result">
+                            <option value="#">Choose One</option>
+                            <option value="Negative" {{ $pasien->result === 'Negative' ? 'selected' : '' }}>Negative
+                            </option>
+                            <option value="Positive" {{ $pasien->result === 'Positive' ? 'selected' : '' }}>Positive
+                            </option>
+                        </select>
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -71,8 +79,13 @@
                     <div class="form-group">
                         <label>Jenis Pemeriksaan</label>
                         <select class="form-control" name="jenis_pemeriksaan">
-                            <option name="Swab-Antigen-Test">Swab Antigen</option>
-                            <option name="PCR-Test">Polymerase Chain Reaction</option>
+                            <option value="#">Choose One</option>
+                            <option value="Swab Antigen"
+                                {{ $pasien->jenis_pemeriksaan === 'Swab Antigen' ? 'selected' : '' }}>Swab Antigen
+                            </option>
+                            <option value="Polymerase Chain Reaction"
+                                {{ $pasien->jenis_pemeriksaan === 'Polymerase Chain Reaction' ? 'selected' : '' }}>
+                                Polymerase Chain Reaction</option>
                         </select>
                     </div>
                 </div>
