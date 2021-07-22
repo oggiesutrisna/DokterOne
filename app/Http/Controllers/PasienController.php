@@ -47,7 +47,7 @@ class PasienController extends Controller
             'result' => 'required|max:255',
         ]);
         Pasien::create($request->all());
-        return redirect()->route('pasiens.index')->with('sukses', 'Data Pasien Telah Ditambah');
+        return redirect()->route('pasiens.index')->with('success', 'Data pasien berhasil ditambahkan!');
     }
 
     /**
@@ -92,7 +92,7 @@ class PasienController extends Controller
             'result' => 'required|max:255',
         ]);
         $pasien->update($request->all());
-        return redirect()->route('pasiens.index')->with('sukses', 'data pasien berhasil di update');
+        return redirect()->route('pasiens.index')->with('success', 'Data pasien berhasil diubah!');
     }
 
     /**
@@ -104,6 +104,6 @@ class PasienController extends Controller
     public function destroy(Pasien $pasien)
     {
         $pasien->delete();
-        return redirect()->route('pasiens.index')->with('success', 'data pasien telah di hapus');
+        return redirect()->route('pasiens.index')->with('success', 'Data pasien berhasil dihapus!');
     }
 }

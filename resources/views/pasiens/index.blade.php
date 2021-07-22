@@ -56,6 +56,7 @@
   </div>
   <!-- /.col -->
 </div>
+@include('partials.flash-message')
 <div class="card">
   <div class="card-header">
     Total Data Pasien : {{ $count = DB::table('pasiens')->count(); }}
