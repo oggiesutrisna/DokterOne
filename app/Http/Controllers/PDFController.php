@@ -3,15 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use PhpOffice\PhpWord\IOFactory;
-use PhpOffice\PhpWord\PhpWord;
-use PhpOffice\PhpWord\TemplateProcessor;
 use App\Models\Pasien;
+use PhpOffice\PhpWord\IOFactory;
+use PhpOffice\PhpWord\TemplateProcessor;
 
-class CreatePDFController extends Controller
+class PDFController extends Controller
 {
-    public function createPDF($id) {
+    public function createPDF(Pasien $pasien, $id) {
         Pasien::find($id);
         $template = new TemplateProcessor(public_path('result.docx'));
 

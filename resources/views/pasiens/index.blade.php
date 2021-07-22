@@ -116,7 +116,7 @@
                     <a href="{{ route('pasiens.edit', $pasien->id) }}" type="button" class="btn btn-warning">
                       <i class="fas fa-edit"></i>
                     </a>
-                    <a href="{{route('createPDF.createPDF', $pasiens->id)}}" type="button" class="btn btn-success">
+                    <a href="{{route('/createPDF', $pasien->id)}}" type="button" class="btn btn-success">
                         <i class="fas fa-print"></i>
                       </a>
                     <button type="submit" class="btn btn-danger">
