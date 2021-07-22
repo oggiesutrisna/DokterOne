@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Auth::routes();
@@ -26,7 +26,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // Route::get('qrpasien', [PasienScanController::class, 'scan']);;
 Route::resource('pasiens', PasienController::class);
-
 Route::get('createPDF/{id}', [PDFController::class, 'createPDF'])->name('createPDF');
 
 Route::get('/clear-cache', function () {

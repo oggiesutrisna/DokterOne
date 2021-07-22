@@ -9,8 +9,8 @@ use PhpOffice\PhpWord\TemplateProcessor;
 
 class PDFController extends Controller
 {
-    public function createPDF(Pasien $pasien, $id) {
-        Pasien::find($id);
+    public function createPDF($id) {
+        // Pasien::find($id);
         $template = new TemplateProcessor(public_path('result.docx'));
 
         $SaveDocPath = public_path('new-result.docx');
