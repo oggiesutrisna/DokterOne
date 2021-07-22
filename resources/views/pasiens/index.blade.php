@@ -103,7 +103,12 @@
           <td>{{ $pasien->jenis_kelamin }}</td>
           <td>{{ $pasien->nationality }}</td>
           <td>{{ $pasien->jenis_pemeriksaan }}</td>
-          <td>{{ $pasien->result }}</td>
+          <td>
+            <span class="badge badge-{{ $pasien->result === 'Positive' ? 'danger' : 'success' }} px-3 py-3"
+              data-toggle="tooltip" data-placement="top" title="{{ $pasien->result }}">
+              <i class="fas {{ $pasien->result === 'Positive' ? 'fa-plus-circle' : 'fa-minus-circle' }}"></i>
+            </span>
+          </td>
           <td>{{ QrCode::size(100)->generate(route('pasiens.show', $pasien->id)) }}</td>
           <form action="{{ route('pasiens.destroy', $pasien->id )}}" method="POST" id="form">
             @csrf
