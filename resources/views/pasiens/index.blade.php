@@ -109,7 +109,11 @@
               <i class="fas {{ $pasien->result === 'Positive' ? 'fa-plus-circle' : 'fa-minus-circle' }}"></i>
             </span>
           </td>
-          <td>{{ QrCode::size(100)->generate(route('pasiens.show', $pasien->id)) }}</td>
+          <td>
+            <div class="card px-3 py-3">
+              {{ QrCode::size(100)->generate(route('pasiens.show', $pasien->id)) }}
+            </div>
+          </td>
           <form action="{{ route('pasiens.destroy', $pasien->id )}}" method="POST" id="form">
             @csrf
             @method('DELETE')
