@@ -85,7 +85,7 @@
           </div>
         </div>
 
-        <a href="{{ route('pasiens.index') }}" class="btn btn-secondary">Kembali</a>
+        {{-- <a href="{{ route('pasiens.index') }}" class="btn btn-secondary">Kembali</a> --}}
 
       </div>
       <!-- /.form-box -->
