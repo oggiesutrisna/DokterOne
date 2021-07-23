@@ -36,19 +36,22 @@ class PDFController extends Controller
             File::makeDirectory(public_path('results'));
         }
 
+        $temporaryPdfFileName = "results/temp-of-$pasien->name[$pasien->nomor_pid].pdf";
+        $newFileName = "results/result-$pasien->nama[$pasien->nomor_pid].pdf";
+
         // So the TemplateProcessor Class will process or change the variables on setValue('variable', 'actual_data')
-        // according to the dynamic data from the $pasien variable and save it to temp.pdf file name
-        $templateDocx->saveAs(public_path('results/temp.pdf'));
+        // according to the dynamic data from the $pasien variable and save it to temporary file name
+        $templateDocx->saveAs($temporaryPdfFileName);
 
-        // After that load the temp.pdf file that was created in the line of code above
-        // And command the IOFactory Class to load temp.pdf file, and save to a new name (this is the result of the file we can see)
-        IOFactory::load('results/temp.pdf')->save("results/result-$pasien->nama[$pasien->nomor_pid].pdf", "PDF");
+        // After that load the temporary file that was created in the line of code above
+        // And command the IOFactory Class to load temporary file, and save to a new name (this is the result of the file we can see)
+        IOFactory::load($temporaryPdfFileName)->save($newFileName, "PDF");
 
-        // If temp.pdf file exists, delete it
-        if (File::exists(public_path('results/temp.pdf'))) {
-            File::delete(public_path('results/temp.pdf'));
+        // If temporary file file exists, delete it
+        if (File::exists(public_path($temporaryPdfFileName))) {
+            File::delete(public_path($temporaryPdfFileName));
         }
 
-        exit;
+        return response()->download(public_path($newFileName));
     }
 }
