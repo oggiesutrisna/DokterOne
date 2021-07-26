@@ -19,10 +19,6 @@ class PDFController extends Controller
 
         $templateDocx = new TemplateProcessor(public_path('result.docx'));
 
-        // set header and footer or dependencies inside of results.docx
-
-        $templateDocx->getHeader();
-        $templateDocx->getFooter();
 
         // Set the variable value inside template docx file to dynamic data based on $pasien variable
         $templateDocx->setValue('nomor_surat', $pasien->nosurat);
