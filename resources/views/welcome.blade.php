@@ -55,7 +55,7 @@
                 <div class="row">
                     <!-- Footer Location-->
                     <div class="col-lg-4 mb-5 mb-lg-0">
-                        <h4 class="text-uppercase mb-4">Licensed</h4>
+                        <h4 class="text-uppercase mb-4">Sponsored</h4>
                         <p class="lead mb-0">
                             <a href="https://twitter.com/@oggiesutrisna">Extensia Creative Bali</a>
                             <br />

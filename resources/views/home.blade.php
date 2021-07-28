@@ -2,31 +2,18 @@
 
 @section('content')
 <div class="container">
-        <div class="row justify-content-center">
-            <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">Message from developer : </h3>
-
-                  <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                      <i class="fas fa-minus"></i>
-                    </button>
-                  </div>
-                  <!-- /.card-tools -->
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                    Dear : <strong>{{Auth::user()->name}}</strong> . <strong>you just logged in. </strong><br>
-                    <hr>
-                    please report when you found an error in this app. <br>
-                    we're gonna fix it immediately. <br>
-                    <hr>
-                        regards. <br>
-                    Oggie Sutrisna.
-                </div>
-                <!-- /.card-body -->
-              </div>
+    <div class="card">
+        <div class="card-header">
+          <h5 class="m-0">Logged in as : {{Auth::user()->name}}</h5>
         </div>
+        <div class="card-body">
+          <h6 class="card-title">You Just Logged in</h6>
+
+          <img src="{{asset('assets/img/undraw_Shared_workspace_re_3gsu.svg')}}">
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
           <!-- /.card -->
     </div>
 @endsection

@@ -19,7 +19,6 @@ class PDFController extends Controller
 
         $templateDocx = new TemplateProcessor(public_path('result.docx'));
 
-
         // Set the variable value inside template docx file to dynamic data based on $pasien variable
         $templateDocx->setValue('nomor_surat', $pasien->nosurat);
         $templateDocx->setValue('nama', $pasien->nama);
