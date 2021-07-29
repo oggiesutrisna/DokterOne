@@ -6,7 +6,7 @@
   <div class="col-md-3 col-sm-6 col-12">
     <div class="info-box">
       <span class="info-box-icon bg-info"><i class="far fa-user"></i></span>
-
+`
       <div class="info-box-content">
         <span class="info-box-text">Total Pasien</span>
         <span class="info-box-number">{{ $count = DB::table('pasiens')->count()}}</span>
@@ -134,7 +134,7 @@
                 </button>
               </div>
             </td>
-        </tr>
+          </tr>
         </form>
       </tbody>
       @endforeach
