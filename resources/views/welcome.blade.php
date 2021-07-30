@@ -59,9 +59,6 @@
                         <p class="lead mb-0">
                             <a href="https://twitter.com/@oggiesutrisna">Extensia Creative Bali</a>
                             <br />
-                            <a href="https://www.unicare-clinic.com">Unicare Clinic</a>
-                            <br />
-                            <a href="https://hydromedbali.com">Hydromedical Clinic</a>
                         </p>
                     </div>
                     <!-- Footer Social Icons-->

@@ -1,59 +1,92 @@
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Faskesku</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login</title>
+
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{asset('assets/plugins/fontawesome-free/css/all.min.css')}}">
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('assets/css/adminlte.min.css') }}">
+    <link rel="stylesheet" href="{{asset('assets/css/adminlte.min.css')}}">
 
     <!-- SweetAlert CSS -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.css') }}">
 </head>
-
-<body>
-    <div class="b-example-divider"></div>
-    <div class="container col-xl-10 col-xxl-8 px-4 py-5">
-        <div class="row align-items-center g-lg-5 py-5">
-            <div class="col-lg-7 text-center text-lg-start">
-                <h1 class="display-4 fw-bold lh-1 mb-2">Faskes Unicare</h1>
-                <p class="col-lg-10 fs-3">You Should Login to use this app. :) </p>
-            </div>
-            <div class="col-md-10 mx-auto col-lg-5">
-                <form method="POST" action="{{ route('login') }}" class="p-4 p-md-5 border rounded-3 bg-light">
-                    @csrf
-                    <label for="floatingInput">Email</label>
-                    <div class="form-floating mb-3">
-                        <input type="email" name="email" id="email" @error('email') is-invalid @enderror"
-                            value="{{ old('email') }}" required class="form-control" id="floatingInput"
-                            placeholder="name@example.com">
-                        @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <label for="floatingPassword">Password</label>
-                    <div class="form-floating mb-3">
-                        <input id="password" type="password" class="form-control" @error('password') is invalid
-                            @enderror name="password" id="floatingPassword" placeholder="Password">
-                    </div>
-                    <div class="checkbox mb-3">
-                    </div>
-                    <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
-                </form>
-            </div>
-        </div>
+<body class="hold-transition login-page">
+<div class="login-box">
+    @error('email')
+    <span class="invalid-feedback" role="alert">
+        <strong>{{$message}}</strong>
+    </span>
+    @enderror
+  <!-- /.login-logo -->
+  <div class="card card-outline card-primary">
+    <div class="card-header text-center">
+      <a href="{{route('home')}}" class="h1"><b>FASKES</b>Unicare</a>
     </div>
-</body>
+    <div class="card-body">
+      <p class="login-box-msg">Sign In to start your life.</p>
 
+      <form action="{{route('login')}}" method="POST">
+        @csrf
+        <div class="input-group mb-3">
+          <input type="email" class="form-control" name="email" id="email" @error('email') is-invalid @enderror value="{{old('email')}}" required placeholder="youremail@youremail.com">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input id="password" type="password" @error('password') is-invalid @enderror type="password" value="{{old('password')}}" class="form-control" placeholder="Password">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <div class="icheck-primary">
+              <input type="checkbox" id="remember">
+              <label for="remember">
+                Remember Me
+              </label>
+            </div>
+          </div>
+          <!-- /.col -->
+          <!-- /.col -->
+        </div>
+      </form>
+
+      <div class="social-auth-links text-center mt-2 mb-3">
+          <button type="Submit" class="btn btn-primary btn-block">Sign In</button>
+        </a>
+      </div>
+      <!-- /.social-auth-links -->
+    </div>
+    <!-- /.card-body -->
+  </div>
+  <!-- /.card --> <br>
+  <div class="text-center">
+      built with 💖 by <a href="twitter.com/@oggiesutrisna"> Oggie Sutrisna </a>
+  </div>
+</div>
+<!-- /.login-box -->
+
+  <!-- SweetAlert -->
+  <script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+  <!-- jQuery -->
+  <script src="{{asset('assets/plugins/jquery/jquery.min.js')}}"></script>
+  <!-- Bootstrap 4 -->
+  <script src="{{asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <!-- AdminLTE App -->
+  <script src="{{asset('assets/js/adminlte.min.js')}}"></script>
+
+  <!-- Custom JS -->
+  <script src="{{ asset('js/script.js') }}"></script>
+</body>
 </html>
