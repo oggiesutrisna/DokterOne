@@ -10,7 +10,7 @@
     <h5>Selamat Datang, Kamu Login Sebagai : <b>{{Auth::user()->name}}</b></h5>
   </div>
   <div class="card-body">
-    <p> Selamat Datang di aplikasi ini </p>
+    <p>Gunakan aplikasi sebijak mungkin. </p>
   </div>
 </div>
 </div>

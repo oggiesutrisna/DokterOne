@@ -16,7 +16,6 @@
       </div>
     </div>
 
-    <!-- SidebarSearch Form -->
 
     <!-- Sidebar Menu -->
     <nav class="mt-2">
@@ -44,6 +43,9 @@
       </ul>
     </nav>
     <!-- /.sidebar-menu -->
+  </div>
+  <div class="sidebar-custom">
+    <a href="#" class="btn btn-link">Logout</a>
   </div>
   <!-- /.sidebar -->
 </aside>
