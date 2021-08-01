@@ -30,7 +30,7 @@
     <div class="card-body">
       <p class="login-box-msg">Sign In to start your life.</p>
 
-      <form action="{{route('login')}}" method="POST">
+      <form action="{{ route('login') }}" method="POST">
         @csrf
         <div class="input-group mb-3">
           <input type="email" class="form-control" name="email" id="email" @error('email') is-invalid @enderror value="{{old('email')}}" required placeholder="youremail@youremail.com">
@@ -63,7 +63,7 @@
       </form>
 
       <div class="social-auth-links text-center mt-2 mb-3">
-          <button type="Submit" class="btn btn-primary btn-block">Sign In</button>
+          <button type="submit" class="btn btn-primary btn-block">Sign In</button>
         </a>
       </div>
       <!-- /.social-auth-links -->
