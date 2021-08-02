@@ -33,7 +33,7 @@
       <form action="{{ route('login') }}" method="POST">
         @csrf
         <div class="input-group mb-3">
-          <input type="email" class="form-control" name="email" id="email" @error('email') is-invalid @enderror value="{{old('email')}}" required placeholder="youremail@youremail.com">
+          <input type="email" class="form-control" name="email" id="email" value="{{old('email')}}" required placeholder="youremail@youremail.com">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -41,7 +41,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input id="password" type="password" @error('password') is-invalid @enderror type="password" value="{{old('password')}}" class="form-control" placeholder="Password">
+          <input id="password" type="password" name="password" value="{{ old('password') }}" class="form-control" placeholder="Password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -60,12 +60,12 @@
           <!-- /.col -->
           <!-- /.col -->
         </div>
-      </form>
 
       <div class="social-auth-links text-center mt-2 mb-3">
           <button type="submit" class="btn btn-primary btn-block">Sign In</button>
         </a>
       </div>
+      </form>
       <!-- /.social-auth-links -->
     </div>
     <!-- /.card-body -->
