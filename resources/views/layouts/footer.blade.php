@@ -1,5 +1,8 @@
 <footer class="main-footer">
+    <div class="float-right d-none d-sm-block">
+        DokterOne
+      </div>
     <!-- To the right -->
     <!-- Default to the left -->
-    <strong><marquee>Copyright &copy; 2012-2021 <a href="https://github.com/oggiesutrisna/dokterone">DokterOne</a> | Designed & Developed By <a href="https://instagram.com/oggiesa_">Oggie Sutrisna</a> | Template by : <a href="https://adminlte.io">AdminLTE.io</a> Under MIT License | </strong> All Rights Reserved </marquee>
+    <b>Built with 💖</b> by <strong><a href="https://twitter.com/@oggiesutrisna"> Oggie Sutrisna</a></strong>
   </footer>
