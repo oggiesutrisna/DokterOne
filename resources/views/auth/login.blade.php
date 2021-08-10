@@ -28,12 +28,12 @@
       <a href="{{route('home')}}" class="h1"><b>FASKES</b>Unicare</a>
     </div>
     <div class="card-body">
-      <p class="login-box-msg">Sign In to start your life.</p>
+      <p class="login-box-msg">Sign In Session</p>
 
       <form action="{{ route('login') }}" method="POST">
         @csrf
         <div class="input-group mb-3">
-          <input type="email" class="form-control" name="email" id="email" value="{{old('email')}}" required placeholder="youremail@youremail.com">
+          <input type="email" class="form-control" name="email" id="email" value="{{ old('email') }}" required placeholder="email">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
