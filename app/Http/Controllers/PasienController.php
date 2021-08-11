@@ -18,6 +18,10 @@ class PasienController extends Controller
     {
         $pasiens = Pasien::orderBy('id', 'DESC')->paginate(5);
 
+        if(request('search')) {
+            $pasiens->where('title' , 'like' , '%' . request('search') . '%');
+        }
+
         return view('pasiens.index', compact('pasiens'));
     }
     /**

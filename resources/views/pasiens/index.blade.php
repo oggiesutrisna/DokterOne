@@ -59,10 +59,10 @@
 @include('partials.flash-message')
 <div class="card">
   <div class="card-header">
-    Total Data Pasien : {{ $count = DB::table('pasiens')->count(); }}
+    Note : <b> Pastikan data anda yang anda masukkan benar. </b>
     <div class="card-tools">
       <div class="input-group input-group-sm" style="width: 150px;">
-        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+        <input type="text" name="table_search" class="form-control float-right" placeholder="Cari" name="search" value="search">
 
         <div class="input-group-append">
           <button type="submit" class="btn btn-default">
@@ -119,7 +119,7 @@
             @csrf
             @method('DELETE')
             <td>
-              <div class="btn-group">
+              <div class="btn-group-vertical">
                 <a href="{{ route('pasiens.show', $pasien->id) }}" type="button" class="btn btn-primary">
                   <i class="fas fa-search"></i>
                 </a>

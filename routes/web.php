@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\PriceController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -26,5 +27,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('pasiens', PasienController::class);
     Route::get('createPDF/{id}', PDFController::class)->name('createPDF');
+    Route::get('price', PriceController::class)->name('price');
 });
 

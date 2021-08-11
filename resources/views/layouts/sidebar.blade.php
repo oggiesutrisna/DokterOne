@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
   <a href="{{route('home')}}" class="brand-link">
-    <span class="brand-text font-weight-light">Faskes</span>
+    <span class="brand-text font-weight-light">Faskes QR</span>
   </a>
 
   <!-- Sidebar -->
