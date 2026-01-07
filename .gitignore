@@ -13,3 +13,10 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+
+# Generated PDF Results
+/public/results/*
+!/public/results/.gitignore
+
+# Agent workflows
+/.agent

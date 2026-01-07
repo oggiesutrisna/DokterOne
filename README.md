@@ -1,10 +1,72 @@
-<p align="center"><a href="#"><img src="https://user-images.githubusercontent.com/40566790/125743825-6fabea4e-d50f-490f-bedd-2f1088718483.png" width="300"></p></a>
+<p align="center">
+  <a href="#">
+    <img src="https://user-images.githubusercontent.com/40566790/125743825-6fabea4e-d50f-490f-bedd-2f1088718483.png" width="300" alt="DokterOne Logo">
+  </a>
+</p>
 
+# DokterOne - Clinic & Patient Management System
 
-## About DokterOne
+DokterOne is a comprehensive web-based application designed to streamline clinic operations, patient management, and COVID-19 result verification. Built with **Laravel 10**, it offers a modern, verifying system for clinics to manage patient data and issue secure, verifiable test certificates.
 
-DokterOne adalah aplikasi berbasis web yang dapat membantu para dokter dan perawat dan juga pasien untuk berhubungan langsung tanpa harus datang ke tempat klinik. Seiring pandemi dari COVID-19 yang tak kunjung dapat kejelasan untuk para masyarakat. Maka Aplikasi DokterOne hadir untuk anda semua. Aplikasi DokterOne juga mampu membuat administrasi keluar masuk obat, mengecek data obat yang tersedia, berapa banyak pasien yang sudah sembuh dan masih belum sembuh, sistem scheduling dan masih banyak lagi lainnya. 
-Per hari ini project ini masih dalam pengerjaan untuk membuat sebuah sertifikat dinamis menggunakan phpword. 
+## 🚀 Key Features
 
-## Contributing
-DokterOne sendiri bersifat Open-Source, jadi kalian juga boleh menggunakan aplikasi ini dimanapun kalian inginkan, atau juga kalian bisa memperbaikinya sendiri jika anda menemukan bug ketika mencoba aplikasi ini. Ajukan Git Request. Nanti akan di approve. Apapun yang kalian benerin / fix, akan langsung di approve.
+*   **Patient Management**: Complete CRUD system for patient data.
+*   **Result Verification**: Generate official COVID-19 test certificates (Antigen/PCR).
+*   **PDF Generation**: High-quality, printable A4 PDF certificates using DomPDF.
+*   **QR Code System**: Instant verification of certificates via QR code scanning.
+*   **Secure Routing**: Slug-based URLs (e.g., `/pasiens/name-id`) for privacy and professionalism.
+*   **Dashboard**: AdminLTE-based responsive dashboard with statistics.
+*   **User Management**: Role-based access for administrators and staff.
+
+## 🛠️ Tech Stack
+
+*   **Framework**: Laravel 10
+*   **Language**: PHP 8.1+
+*   **Database**: MySQL
+*   **PDF Engine**: DomPDF
+*   **Frontend**: Blade, Bootstrap, AdminLTE, FontAwesome
+
+## 📦 Installation
+
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/oggiesutrisna/DokterOne.git
+    cd DokterOne
+    ```
+
+2.  **Install PHP Dependencies**
+    ```bash
+    composer install
+    ```
+
+3.  **Environment Setup**
+    ```bash
+    cp .env.example .env
+    php artisan key:generate
+    ```
+
+4.  **Database Setup**
+    *   Create a database (e.g., `dokterone`).
+    *   Update `.env` with your database credentials.
+    *   Run migrations and seeders:
+    ```bash
+    php artisan migrate:fresh --seed
+    ```
+
+5.  **Run the Application**
+    ```bash
+    php artisan serve
+    ```
+
+## 🔑 Default Credentials
+
+After seeding the database, you can log in with:
+*   **Username**: `admin`
+*   **Password**: `password`
+
+## 📄 License
+
+DokterOne is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+---
+Built with ❤️ by [Oggie Sutrisna](https://twitter.com/oggiesutrisna)
