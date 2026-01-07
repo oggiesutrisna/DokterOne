@@ -57,10 +57,35 @@
     <!-- /.col -->
   </div>
   @include('partials.flash-message')
-  <div class="card">
+
+  @if($count >= 4)
+  <div class="row">
+    <div class="col-12">
+      <div class="card bg-gradient-warning">
+        <div class="card-header border-0">
+          <h3 class="card-title">
+            <i class="fas fa-crown mr-1"></i>
+            Upgrade to Full Version
+          </h3>
+        </div>
+        <div class="card-body">
+          You have reached the free limit of <strong>4 patients</strong>. To continue adding more patients and unlock all features, please upgrade to one of our premium packages.
+        </div>
+        <div class="card-footer border-0">
+          <a href="{{ route('price') }}" class="btn btn-outline-dark btn-sm">
+            <i class="fas fa-shopping-cart mr-1"></i> View Pricing & Upgrade
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  @endif
     <div class="card-header">
-      Note : <b> Pastikan data anda yang anda masukkan benar. </b>
-      <div class="card-tools">
+      <h3 class="card-title">Data Pasien List</h3>
+      <div class="card-tools d-flex">
+        <a href="{{ route('pasiens.create') }}" class="btn btn-primary btn-sm mr-2 {{ $count >= 4 ? 'disabled' : '' }}">
+          <i class="fas fa-plus mr-1"></i> Create New Patient
+        </a>
         <div class="input-group input-group-sm" style="width: 150px;">
           <input type="text" name="table_search" class="form-control float-right" placeholder="Cari" name="search"
             value="search">

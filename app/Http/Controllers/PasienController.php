@@ -12,7 +12,7 @@ class PasienController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -27,10 +27,14 @@ class PasienController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
      */
     public function create()
     {
+        if (Pasien::count() >= 4) {
+            return redirect()->route('pasiens.index')->with('error', 'Limit reached! You have reached the maximum of 4 patients. Please purchase the full package to add more.');
+        }
+
         return view('pasiens.create');
     }
 
@@ -42,6 +46,10 @@ class PasienController extends Controller
      */
     public function store(StorePasienRequest $request)
     {
+        if (Pasien::count() >= 4) {
+            return redirect()->route('pasiens.index')->with('error', 'Limit reached! You have reached the maximum of 4 patients. Please purchase the full package to add more.');
+        }
+
         Pasien::create($request->all());
 
         return redirect()->route('pasiens.index')->with('success', 'Data pasien berhasil ditambahkan!');
