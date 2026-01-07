@@ -26,7 +26,8 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('pasiens', PasienController::class);
-    Route::get('createPDF/{id}', PDFController::class)->name('createPDF');
+    Route::get('createPDF/{pasien}', PDFController::class)->name('createPDF');
+    Route::get('previewPDF/{pasien}', [PDFController::class, 'preview'])->name('previewPDF');
     Route::get('price', PriceController::class)->name('price');
 });
 

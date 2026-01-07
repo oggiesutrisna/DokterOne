@@ -3,55 +3,68 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pasien;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\File;
-use PhpOffice\PhpWord\IOFactory;
-use PhpOffice\PhpWord\Settings;
-use PhpOffice\PhpWord\TemplateProcessor;
 
 class PDFController extends Controller
 {
-    public function __invoke($id)
+    /**
+     * Download the PDF
+     */
+    public function __invoke(Pasien $pasien)
     {
-        $pasien = Pasien::find($id);
+        // Generate PDF from Blade template
+        $pdf = Pdf::loadView('pdf.result', compact('pasien'));
+        
+        // ... rest of code uses $pasien directly
+        
+        // Set paper size and orientation
+        $pdf->setPaper('a4', 'portrait');
+        
+        // Optional: Set DomPDF options for better rendering
+        $pdf->setOptions([
+            'isHtml5ParserEnabled' => true,
+            'isRemoteEnabled' => true,
+            'defaultFont' => 'DejaVu Sans',
+        ]);
 
-        Settings::setPdfRendererName(Settings::PDF_RENDERER_DOMPDF);
-        Settings::setPdfRendererPath('.');
-
-        $templateDocx = new TemplateProcessor(public_path('result.docx'));
-
-        // Set the variable value inside template docx file to dynamic data based on $pasien variable
-        $templateDocx->setValue('nomor_surat', $pasien->nosurat);
-        $templateDocx->setValue('nama', $pasien->nama);
-        $templateDocx->setValue('dob', $pasien->dob);
-        $templateDocx->setValue('jenis_kelamin', $pasien->jenis_kelamin);
-        $templateDocx->setValue('sampling_time', $pasien->sampling_time);
-        $templateDocx->setValue('nomor_pid', $pasien->nomor_pid);
-        $templateDocx->setValue('jenis_pemeriksaan', $pasien->jenis_pemeriksaan);
-        $templateDocx->setValue('nationality', $pasien->nationality);
-        $templateDocx->setValue('result', $pasien->result);
-
-        // If `results` folder didn't exists on disk, so make the `results` directory
-        // Example path will be created are : /public/`results`/
+        // If `results` folder didn't exist, create it
         if (!File::exists(public_path('results'))) {
             File::makeDirectory(public_path('results'));
         }
 
-        $temporaryPdfFileName = "results/temp-of-$pasien->name[$pasien->nomor_pid].pdf";
-        $newFileName = "results/result-$pasien->nama[$pasien->nomor_pid].pdf";
+        $fileName = "result-{$pasien->nama}[{$pasien->nomor_pid}].pdf";
+        $filePath = public_path("results/{$fileName}");
+        
+        // Save the PDF
+        $pdf->save($filePath);
 
-        // So the TemplateProcessor Class will process or change the variables on setValue('variable', 'actual_data')
-        // according to the dynamic data from the $pasien variable and save it to temporary file name
-        $templateDocx->saveAs($temporaryPdfFileName);
+        // Return as download
+        return response()->download($filePath, $fileName);
+    }
 
-        // After that load the temporary file that was created in the line of code above
-        // And command the IOFactory Class to load temporary file, and save to a new name (this is the result of the file we can see)
-        IOFactory::load($temporaryPdfFileName)->save($newFileName, "PDF");
+    /**
+     * Preview the PDF in browser
+     */
+    public function preview(Pasien $pasien)
+    {
+        // Generate PDF from Blade template
+        $pdf = Pdf::loadView('pdf.result', compact('pasien'));
+        
+        // ... rest of code uses $pasien directly
 
-        // If temporary file file exists, delete it
-        if (File::exists(public_path($temporaryPdfFileName))) {
-            File::delete(public_path($temporaryPdfFileName));
-        }
+        
+        // Set paper size and orientation
+        $pdf->setPaper('a4', 'portrait');
+        
+        // Optional: Set DomPDF options for better rendering
+        $pdf->setOptions([
+            'isHtml5ParserEnabled' => true,
+            'isRemoteEnabled' => true,
+            'defaultFont' => 'DejaVu Sans',
+        ]);
 
-        return response()->download(public_path($newFileName));
+        // Stream the PDF to browser (opens in new tab)
+        return $pdf->stream("preview-{$pasien->nama}.pdf");
     }
 }
