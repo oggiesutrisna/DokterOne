@@ -42,27 +42,55 @@ class AntreanController extends Controller
         $service = $request->query('service', '');
         $number = $request->query('number');
         $antreanId = $request->query('antrean_id');
-        
+        $pasienId = $request->query('pasien_id');
+        $searchQuery = $request->query('search', '');
+
+        // Search patients for step 1
+        $pasiens = collect();
+        if ($step == 1 && $searchQuery) {
+            $pasiens = \App\Models\Pasien::where('nama', 'like', "%{$searchQuery}%")
+                ->orWhere('nomor_pid', 'like', "%{$searchQuery}%")
+                ->limit(10)
+                ->get();
+        }
+
+        // Get selected patient
+        $selectedPasien = null;
+        if ($pasienId) {
+            $selectedPasien = \App\Models\Pasien::find($pasienId);
+        }
+
+        // Validate patient is selected before proceeding past step 1
+        if ($step >= 2 && !$selectedPasien) {
+            return redirect()->route('antrean.wizard', ['step' => 1])
+                ->with('error', 'Please identify the patient first.');
+        }
+
         $takenNumbers = [];
-        if ($step >= 2) {
+        if ($step >= 3) {
             $takenNumbers = Antrean::whereDate('created_at', now())->pluck('no_antrean')->toArray();
         }
 
-        // For demo, grab the first patient or null (safely)
-        $defaultPasienId = optional(\App\Models\Pasien::first())->id;
-
-        // For step 4 (success), load the stored antrean data
         $antrean = null;
-        if ($step == 4 && $antreanId) {
+        if ($step == 5 && $antreanId) {
             $antrean = Antrean::with('pasien')->find($antreanId);
         }
 
-        return view('antreans', compact('step', 'service', 'number', 'takenNumbers', 'defaultPasienId', 'antrean'));
+        return view('antreans', compact(
+            'step',
+            'service',
+            'number',
+            'takenNumbers',
+            'pasienId',
+            'selectedPasien',
+            'pasiens',
+            'searchQuery',
+            'antrean'
+        ));
     }
 
     public function storeWizard(StoreAntreanRequest $request)
     {
-        // For the wizard, we check if the number is already taken today
         $exists = Antrean::whereDate('created_at', now())
             ->where('no_antrean', $request->no_antrean)
             ->exists();
@@ -73,9 +101,8 @@ class AntreanController extends Controller
 
         $antrean = Antrean::create($request->validated());
 
-        // Redirect to step 4 (success) with the created antrean ID
         return redirect()->route('antrean.wizard', [
-            'step' => 4,
+            'step' => 5,
             'antrean_id' => $antrean->id
         ])->with('success', 'Queue number reserved successfully!');
     }

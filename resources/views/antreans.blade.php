@@ -546,6 +546,17 @@
         .footer-spacer {
             width: 1px;
         }
+
+        /* ===== Patient Card ===== */
+        .patient-card:hover {
+            border-color: var(--color-denim);
+            background-color: var(--color-blue-50);
+            transform: translateX(4px);
+        }
+
+        .patient-card:hover svg {
+            color: var(--color-denim);
+        }
     </style>
 </head>
 
@@ -558,15 +569,15 @@
                 <p class="wizard-subtitle">Follow the steps to secure your spot.</p>
             </div>
             <div class="step-indicator">
-                <span class="step-current">Step {{ min($step, 4) }}</span>
+                <span class="step-current">Step {{ min($step, 5) }}</span>
                 <span class="step-divider">/</span>
-                <span class="step-total">4</span>
+                <span class="step-total">5</span>
             </div>
         </header>
 
         <!-- Progress Bar -->
         <div class="progress-container">
-            <div class="progress-bar" style="width: {{ (min($step, 4) / 4) * 100 }}%"></div>
+            <div class="progress-bar" style="width: {{ (min($step, 5) / 5) * 100 }}%"></div>
         </div>
 
         <!-- Alerts -->
@@ -580,13 +591,117 @@
                 {{ session('error') }}
             </div>
         @endif
+        @if($errors->any())
+            <div class="alert alert-error">
+                <ul style="margin: 0; padding-left: 1.5rem;">
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
         <!-- Content Area -->
         <div class="wizard-content">
 
-            <!-- Step 1: Welcome / Service Selection -->
+            <!-- Step 1: Patient Identification -->
             @if($step == 1)
                 <div class="welcome-container step-enter">
+                    <div class="welcome-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                    </div>
+                    <h2 class="welcome-title">Patient Identification</h2>
+                    <p class="welcome-text">Please search for and identify the patient before proceeding with queue registration.</p>
+
+                    <!-- Search Form -->
+                    <form action="{{ route('antrean.wizard') }}" method="GET" class="search-form" style="max-width: 28rem; margin: 0 auto 2rem auto;">
+                        <input type="hidden" name="step" value="1">
+                        <div style="display: flex; gap: 0.5rem;">
+                            <input type="text" name="search" value="{{ $searchQuery ?? '' }}"
+                                placeholder="Search by name or PID number..."
+                                style="flex: 1; padding: 0.75rem 1rem; border: 1px solid var(--color-gray-300); border-radius: var(--radius-lg); font-size: 1rem; outline: none; transition: border-color 0.2s ease;"
+                                onfocus="this.style.borderColor='var(--color-denim)'"
+                                onblur="this.style.borderColor='var(--color-gray-300)'">
+                            <button type="submit" class="btn-primary" style="max-width: 6rem; padding: 0.75rem 1rem;">
+                                Search
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Search Results -->
+                    @if($searchQuery && $pasiens->count() > 0)
+                        <div style="max-width: 32rem; margin: 0 auto;">
+                            <p style="font-size: 0.875rem; color: var(--color-gray-500); margin-bottom: 1rem;">
+                                Found {{ $pasiens->count() }} patient(s) matching "{{ $searchQuery }}"
+                            </p>
+                            <div class="patient-list" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                                @foreach($pasiens as $pasien)
+                                    <a href="{{ route('antrean.wizard', ['step' => 2, 'pasien_id' => $pasien->id]) }}"
+                                        class="patient-card" style="display: block; padding: 1rem 1.5rem; border: 1px solid var(--color-gray-200); border-radius: var(--radius-lg); text-align: left; transition: all 0.2s ease; text-decoration: none;">
+                                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                                            <div>
+                                                <div style="font-weight: 600; color: var(--color-gray-900); margin-bottom: 0.25rem;">
+                                                    {{ $pasien->nama }}
+                                                </div>
+                                                <div style="font-size: 0.875rem; color: var(--color-gray-500);">
+                                                    PID: {{ $pasien->nomor_pid }} &bull; DOB: {{ $pasien->dob ? \Carbon\Carbon::parse($pasien->dob)->format('d M Y') : 'N/A' }}
+                                                </div>
+                                            </div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-gray-400);">
+                                                <polyline points="9 18 15 12 9 6"></polyline>
+                                            </svg>
+                                        </div>
+                                    </a>
+                                @endforeach
+                            </div>
+                        </div>
+                    @elseif($searchQuery && $pasiens->count() == 0)
+                        <div style="max-width: 28rem; margin: 0 auto; text-align: center; padding: 2rem; background-color: var(--color-gray-50); border-radius: var(--radius-lg); border: 1px solid var(--color-gray-200);">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-gray-400); margin-bottom: 1rem;">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                            <p style="color: var(--color-gray-600); margin-bottom: 1rem;">No patients found matching "{{ $searchQuery }}"</p>
+                            <a href="{{ route('pasiens.create') }}" class="btn-primary" style="display: inline-block; text-decoration: none; max-width: 12rem;">
+                                Register New Patient
+                            </a>
+                        </div>
+                    @else
+                        <div style="max-width: 28rem; margin: 0 auto; text-align: center; padding: 2rem; background-color: var(--color-blue-50); border-radius: var(--radius-lg); border: 1px solid var(--color-gray-200);">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-denim); margin-bottom: 0.75rem;">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                            <p style="color: var(--color-gray-600); font-size: 0.9375rem;">
+                                Enter patient name or PID number above to search
+                            </p>
+                        </div>
+                    @endif
+                </div>
+            @endif
+
+            <!-- Step 2: Service Selection -->
+            @if($step == 2)
+                <div class="welcome-container step-enter">
+                    @if($selectedPasien)
+                        <div style="margin-bottom: 1.5rem; padding: 1rem; background-color: var(--color-green-50); border-radius: var(--radius-lg); border: 1px solid var(--color-green-200);">
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-green-700);">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                </svg>
+                                <div style="text-align: left;">
+                                    <div style="font-weight: 600; color: var(--color-green-800);">{{ $selectedPasien->nama }}</div>
+                                    <div style="font-size: 0.875rem; color: var(--color-green-700);">PID: {{ $selectedPasien->nomor_pid }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
                     <div class="welcome-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                             stroke-width="2">
@@ -594,17 +709,16 @@
                                 d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                         </svg>
                     </div>
-                    <h2 class="welcome-title">Welcome to DokterOne</h2>
-                    <p class="welcome-text">Please proceed to select your queue number for today's consultation. Our wizard
-                        will guide you through the process.</p>
+                    <h2 class="welcome-title">Select Service</h2>
+                    <p class="welcome-text">Choose the type of consultation for today's visit.</p>
 
                     <div class="service-grid">
-                        <a href="{{ route('antrean.wizard', ['step' => 2, 'service' => 'General Checkup']) }}"
+                        <a href="{{ route('antrean.wizard', ['step' => 3, 'pasien_id' => $pasienId, 'service' => 'General Checkup']) }}"
                             class="service-card">
                             <div class="service-card-title">General Checkup</div>
                             <div class="service-card-desc">Regular health screening</div>
                         </a>
-                        <a href="{{ route('antrean.wizard', ['step' => 2, 'service' => 'Specialist Consultation']) }}"
+                        <a href="{{ route('antrean.wizard', ['step' => 3, 'pasien_id' => $pasienId, 'service' => 'Specialist Consultation']) }}"
                             class="service-card">
                             <div class="service-card-title">Specialist Consultation</div>
                             <div class="service-card-desc">Heart, Eye, or Skin specialist</div>
@@ -613,9 +727,21 @@
                 </div>
             @endif
 
-            <!-- Step 2: Number Selection -->
-            @if($step == 2)
+            <!-- Step 3: Number Selection -->
+            @if($step == 3)
                 <div class="step-enter">
+                    @if($selectedPasien)
+                        <div style="max-width: 64rem; margin: 0 auto 1.5rem auto; padding: 0.75rem 1rem; background-color: var(--color-green-50); border-radius: var(--radius-lg); border: 1px solid var(--color-green-200);">
+                            <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-green-700);">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                </svg>
+                                <span style="color: var(--color-green-800);"><strong>{{ $selectedPasien->nama }}</strong> ({{ $selectedPasien->nomor_pid }})</span>
+                            </div>
+                        </div>
+                    @endif
+
                     <div class="number-header">
                         <div class="service-badge">{{ $service ?? 'Select a Service' }}</div>
                         <h2 class="number-title">Select Your Queue Number</h2>
@@ -631,7 +757,7 @@
                             @if($isTaken)
                                 <div class="number-btn-disabled" title="Taken">{{ $num }}</div>
                             @else
-                                <a href="{{ route('antrean.wizard', ['step' => 3, 'service' => $service, 'number' => $num]) }}"
+                                <a href="{{ route('antrean.wizard', ['step' => 4, 'pasien_id' => $pasienId, 'service' => $service, 'number' => $num]) }}"
                                     class="number-btn">
                                     {{ $num }}
                                 </a>
@@ -641,8 +767,8 @@
                 </div>
             @endif
 
-            <!-- Step 3: Confirmation -->
-            @if($step == 3)
+            <!-- Step 4: Confirmation -->
+            @if($step == 4)
                 <div class="confirm-container step-enter">
                     <div class="confirm-number-circle">
                         <span class="confirm-number">{{ str_pad($number ?? 0, 2, '0', STR_PAD_LEFT) }}</span>
@@ -652,8 +778,20 @@
 
                     <div class="details-card">
                         <div class="details-row">
+                            <span class="details-label">Patient</span>
+                            <span class="details-value">{{ $selectedPasien->nama ?? 'N/A' }}</span>
+                        </div>
+                        <div class="details-row">
+                            <span class="details-label">PID</span>
+                            <span class="details-value">{{ $selectedPasien->nomor_pid ?? 'N/A' }}</span>
+                        </div>
+                        <div class="details-row">
                             <span class="details-label">Service</span>
                             <span class="details-value">{{ $service ?? 'N/A' }}</span>
+                        </div>
+                        <div class="details-row">
+                            <span class="details-label">Queue Number</span>
+                            <span class="details-value">{{ str_pad($number ?? 0, 2, '0', STR_PAD_LEFT) }}</span>
                         </div>
                         <div class="details-row">
                             <span class="details-label">Date</span>
@@ -667,7 +805,7 @@
 
                     <form action="{{ route('antrean.wizard.store') }}" method="POST" class="confirm-form">
                         @csrf
-                        <input type="hidden" name="pasien_id" value="{{ $defaultPasienId }}">
+                        <input type="hidden" name="pasien_id" value="{{ $pasienId }}">
                         <input type="hidden" name="no_antrean" value="{{ $number ?? '' }}">
                         <input type="hidden" name="service" value="{{ $service ?? '' }}">
 
@@ -678,8 +816,8 @@
                 </div>
             @endif
 
-            <!-- Step 4: Success / Stored Data -->
-            @if($step == 4 && isset($antrean))
+            <!-- Step 5: Success / Stored Data -->
+            @if($step == 5 && isset($antrean))
                 <div class="confirm-container step-enter">
                     <div class="success-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -708,6 +846,10 @@
                             <span class="details-value">{{ $antrean->pasien->nama ?? 'N/A' }}</span>
                         </div>
                         <div class="details-row">
+                            <span class="details-label">PID</span>
+                            <span class="details-value">{{ $antrean->pasien->nomor_pid ?? 'N/A' }}</span>
+                        </div>
+                        <div class="details-row">
                             <span class="details-label">Date</span>
                             <span class="details-value">{{ $antrean->created_at->toFormattedDateString() }}</span>
                         </div>
@@ -732,8 +874,8 @@
 
         <!-- Footer / Navigation -->
         <footer class="wizard-footer">
-            @if($step > 1 && $step < 4)
-                <a href="{{ route('antrean.wizard', ['step' => $step - 1, 'service' => $service ?? '', 'number' => $number ?? '']) }}"
+            @if($step > 1 && $step < 5)
+                <a href="{{ route('antrean.wizard', ['step' => $step - 1, 'pasien_id' => $pasienId ?? '', 'service' => $service ?? '', 'number' => $number ?? '']) }}"
                     class="btn-back">
                     Back
                 </a>
@@ -741,11 +883,11 @@
                 <div class="footer-spacer"></div>
             @endif
 
-            @if($step == 3)
+            @if($step == 4)
                 <a href="{{ route('antrean.wizard') }}" class="btn-cancel">Cancel</a>
             @endif
 
-            @if($step == 4)
+            @if($step == 5)
                 <a href="{{ route('antrean.wizard') }}" class="btn-cancel">Start Over</a>
             @endif
         </footer>
