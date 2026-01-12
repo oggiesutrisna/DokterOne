@@ -22,7 +22,7 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
          with font-awesome or any other icon font library -->
-         <li class="nav-item menu-open">
+        <li class="nav-item menu-open">
           <a href="#" class="nav-link {{ request()->is('home') ? 'active' : '' }}">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
@@ -33,23 +33,51 @@
           <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="{{route('pasiens.index')}}"
-              class="nav-link {{ request()->routeIs('pasiens.*') ? 'active' : '' }}">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Data Pasien</p>
-            </a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </nav>
-  <!-- /.sidebar-menu -->
-</div>
-<div class="sidebar-custom">
-  <a href="{{ route('logout' )}}"
-  onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-link">Logout</a>
-  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-    @csrf
-  </form>
-</div>
-<!-- /.sidebar -->
+                class="nav-link {{ request()->routeIs('pasiens.*') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Data Pasien</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('dokters.index')}}"
+                class="nav-link {{ request()->routeIs('dokters.*') ? 'active' : '' }}">
+                <i class="fas fa-user-md nav-icon"></i>
+                <p>Data Dokter</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('perawats.index')}}"
+                class="nav-link {{ request()->routeIs('perawats.*') ? 'active' : '' }}">
+                <i class="fas fa-user-nurse nav-icon"></i>
+                <p>Data Perawat</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('absensis.index')}}"
+                class="nav-link {{ request()->routeIs('absensis.*') ? 'active' : '' }}">
+                <i class="fas fa-calendar-check nav-icon"></i>
+                <p>Data Absensi</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('antreans.index')}}"
+                class="nav-link {{ request()->routeIs('antreans.*') ? 'active' : '' }}">
+                <i class="fas fa-users nav-icon"></i>
+                <p>Data Antrean</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <div class="sidebar-custom">
+    <a href="{{ route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+      class="btn btn-link">Logout</a>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+      @csrf
+    </form>
+  </div>
+  <!-- /.sidebar -->
 </aside>

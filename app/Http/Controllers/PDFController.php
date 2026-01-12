@@ -11,7 +11,7 @@ class PDFController extends Controller
     /**
      * Download the PDF
      */
-    public function __invoke(Pasien $pasien)
+    public function download(Pasien $pasien)
     {
         // Generate PDF from Blade template
         $pdf = Pdf::loadView('pdf.result', compact('pasien'));

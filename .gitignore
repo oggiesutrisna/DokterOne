@@ -18,5 +18,3 @@ yarn-error.log
 /public/results/*
 !/public/results/.gitignore
 
-# Agent workflows
-/.agent

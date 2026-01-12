@@ -1,9 +1,14 @@
 <?php
 
+use App\Http\Controllers\AbsensiController;
+use App\Http\Controllers\AntreanController;
+use App\Http\Controllers\DokterController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\PerawatController;
 use App\Http\Controllers\PriceController;
-use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,13 +26,19 @@ Route::get('/', function () {
     return view('Welcome');
 });
 
+Route::get('/antrean-wizard', [AntreanController::class, 'wizard'])->name('antrean.wizard');
+Route::post('/antrean-wizard', [AntreanController::class, 'storeWizard'])->name('antrean.wizard.store');
+
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::resource('pasiens', PasienController::class);
-    Route::get('createPDF/{pasien}', PDFController::class)->name('createPDF');
+    Route::resource('dokters', DokterController::class);
+    Route::resource('perawats', PerawatController::class);
+    Route::resource('absensis', AbsensiController::class);
+    Route::resource('antreans', AntreanController::class);
+    Route::get('createPDF/{pasien}', [PDFController::class, 'download'])->name('createPDF');
     Route::get('previewPDF/{pasien}', [PDFController::class, 'preview'])->name('previewPDF');
     Route::get('price', PriceController::class)->name('price');
 });
-
