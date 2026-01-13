@@ -1,54 +1,35 @@
-<nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    <!-- Left navbar links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{route('home')}}" class="nav-link">Home</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{route('pasiens.create')}}" class="nav-link">Buat Data Pasien</a>
-      </li>
-    </ul>
+<nav class="top-navbar">
+  <!-- Left -->
+  <div class="navbar-left">
+    <button class="navbar-toggle" id="sidebarToggle">
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="navbar-breadcrumb">
+      <span class="navbar-breadcrumb-item">Dashboard</span>
+      <span class="navbar-breadcrumb-separator">/</span>
+      <span class="navbar-breadcrumb-item active">@yield('title', 'Home')</span>
+    </div>
+  </div>
 
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-      <!-- Navbar Search -->
-      <li class="nav-item">
-        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-          <i class="fas fa-search"></i>
-        </a>
-        <div class="navbar-search-block">
-          <form class="form-inline">
-            <div class="input-group input-group-sm">
-              <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-              <div class="input-group-append">
-                <button class="btn btn-navbar" type="submit">
-                  <i class="fas fa-search"></i>
-                </button>
-                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </li>
+  <!-- Center -->
+  <div class="navbar-center">
+    <form action="{{ route('pasiens.index') }}" method="GET" class="navbar-search">
+      <i class="fas fa-search navbar-search-icon"></i>
+      <input type="text" class="navbar-search-input" placeholder="Search patients..." name="search" value="{{ request('search') }}">
+    </form>
+  </div>
 
-      <!-- Messages Dropdown Menu -->
-
-      <!-- Notifications Dropdown Menu -->
-
-      <li class="nav-item">
-        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-          <i class="fas fa-expand-arrows-alt"></i>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-          <i class="fas fa-th-large"></i>
-        </a>
-      </li>
-    </ul>
-  </nav>
+  <!-- Right -->
+  <div class="navbar-right">
+    <button class="navbar-btn" title="Notifications">
+      <i class="fas fa-bell"></i>
+      <span class="navbar-btn-badge"></span>
+    </button>
+    <button class="navbar-user-btn">
+      <div class="navbar-user-avatar">
+        {{ strtoupper(substr(Auth::user()->name ?? 'U', 0, 1)) }}
+      </div>
+      <span class="navbar-user-name">{{ Auth::user()->name ?? 'Guest' }}</span>
+    </button>
+  </div>
+</nav>

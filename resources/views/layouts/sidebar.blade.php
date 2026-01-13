@@ -1,83 +1,88 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
-  <!-- Brand Logo -->
-  <a href="{{route('home')}}" class="brand-link">
-    <span class="brand-text font-weight-light">Faskes QR</span>
-  </a>
+<aside class="sidebar">
+  <!-- Brand -->
+  <div class="sidebar-brand">
+    <div class="sidebar-brand-icon">🏥</div>
+    <div class="sidebar-brand-text">Faskes<span>Unicare</span></div>
+  </div>
 
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <!-- Sidebar user panel (optional) -->
-    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-      <div class="image">
-        <img src="{{asset('assets/img/avataaars (1).svg')}}" class="img-circle elevation-2" alt="User Image">
-      </div>
-      <div class="info">
-        <a href="#" class="d-block">{{Auth::user()->name}}</a>
-      </div>
-    </div>
-
-
-    <!-- Sidebar Menu -->
-    <nav class="mt-2">
-      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        <!-- Add icons to the links using the .nav-icon class
-         with font-awesome or any other icon font library -->
-        <li class="nav-item menu-open">
-          <a href="#" class="nav-link {{ request()->is('home') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
-            <p>
-              Dashboard
-              <i class="right fas fa-angle-left"></i>
-            </p>
+  <!-- Menu -->
+  <nav class="sidebar-menu">
+    <!-- Menu -->
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Menu</div>
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-item">
+          <a href="{{ route('home') }}" class="sidebar-nav-link {{ request()->routeIs('home') ? 'active' : '' }}">
+            <i class="sidebar-nav-icon fas fa-home"></i>
+            <span>Dashboard</span>
           </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="{{route('pasiens.index')}}"
-                class="nav-link {{ request()->routeIs('pasiens.*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Data Pasien</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{route('dokters.index')}}"
-                class="nav-link {{ request()->routeIs('dokters.*') ? 'active' : '' }}">
-                <i class="fas fa-user-md nav-icon"></i>
-                <p>Data Dokter</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{route('perawats.index')}}"
-                class="nav-link {{ request()->routeIs('perawats.*') ? 'active' : '' }}">
-                <i class="fas fa-user-nurse nav-icon"></i>
-                <p>Data Perawat</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{route('absensis.index')}}"
-                class="nav-link {{ request()->routeIs('absensis.*') ? 'active' : '' }}">
-                <i class="fas fa-calendar-check nav-icon"></i>
-                <p>Data Absensi</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{route('antreans.index')}}"
-                class="nav-link {{ request()->routeIs('antreans.*') ? 'active' : '' }}">
-                <i class="fas fa-users nav-icon"></i>
-                <p>Data Antrean</p>
-              </a>
-            </li>
-          </ul>
         </li>
       </ul>
-    </nav>
-    <!-- /.sidebar-menu -->
-  </div>
-  <div class="sidebar-custom">
-    <a href="{{ route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-      class="btn btn-link">Logout</a>
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+    </div>
+
+    <!-- Data -->
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Data</div>
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-item">
+          <a href="{{ route('pasiens.index') }}" class="sidebar-nav-link {{ request()->routeIs('pasiens.*') ? 'active' : '' }}">
+            <i class="sidebar-nav-icon fas fa-users"></i>
+            <span>Pasien</span>
+            <span class="sidebar-nav-badge">{{ \App\Models\Pasien::count() }}</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="{{ route('dokters.index') }}" class="sidebar-nav-link {{ request()->routeIs('dokters.*') ? 'active' : '' }}">
+            <i class="sidebar-nav-icon fas fa-user-md"></i>
+            <span>Dokter</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="{{ route('perawats.index') }}" class="sidebar-nav-link {{ request()->routeIs('perawats.*') ? 'active' : '' }}">
+            <i class="sidebar-nav-icon fas fa-user-nurse"></i>
+            <span>Perawat</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Operations -->
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Operations</div>
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-item">
+          <a href="{{ route('absensis.index') }}" class="sidebar-nav-link {{ request()->routeIs('absensis.*') ? 'active' : '' }}">
+            <i class="sidebar-nav-icon fas fa-calendar-check"></i>
+            <span>Absensi</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="{{ route('antreans.index') }}" class="sidebar-nav-link {{ request()->routeIs('antreans.*') ? 'active' : '' }}">
+            <i class="sidebar-nav-icon fas fa-clipboard-list"></i>
+            <span>Antrean</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Footer -->
+  <div class="sidebar-footer">
+    <div class="sidebar-user">
+      <div class="sidebar-user-avatar">
+        {{ strtoupper(substr(Auth::user()->name ?? 'U', 0, 1)) }}
+      </div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name">{{ Auth::user()->name ?? 'Guest' }}</div>
+        <div class="sidebar-user-role">Administrator</div>
+      </div>
+    </div>
+    <form action="{{ route('logout') }}" method="POST">
       @csrf
+      <button type="submit" class="sidebar-logout-btn">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </button>
     </form>
   </div>
-  <!-- /.sidebar -->
 </aside>

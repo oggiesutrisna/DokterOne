@@ -10,8 +10,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free/css/all.min.css') }}">
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="{{ asset('assets/css/adminlte.min.css') }}">
+  <!-- Neubrutalism Theme -->
+  <link rel="stylesheet" href="{{ asset('css/neubrutalism.css') }}">
 
   <style>
     :root {

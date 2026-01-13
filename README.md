@@ -15,7 +15,7 @@ DokterOne is a comprehensive web-based application designed to streamline clinic
 *   **PDF Generation**: High-quality, printable A4 PDF certificates using DomPDF.
 *   **QR Code System**: Instant verification of certificates via QR code scanning.
 *   **Secure Routing**: Slug-based URLs (e.g., `/pasiens/name-id`) for privacy and professionalism.
-*   **Dashboard**: AdminLTE-based responsive dashboard with statistics.
+*   **Dashboard**: Neubrutalism-styled responsive dashboard with statistics.
 *   **User Management**: Role-based access for administrators and staff.
 
 ## 🛠️ Tech Stack
@@ -24,7 +24,7 @@ DokterOne is a comprehensive web-based application designed to streamline clinic
 *   **Language**: PHP 8.1+
 *   **Database**: MySQL
 *   **PDF Engine**: DomPDF
-*   **Frontend**: Blade, Bootstrap, AdminLTE, FontAwesome
+*   **Frontend**: Blade, Neubrutalism CSS, FontAwesome
 
 ## 📦 Installation
 

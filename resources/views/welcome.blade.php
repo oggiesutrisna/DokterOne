@@ -18,17 +18,17 @@
         /* ========================================
            NEUBRUTALISM DESIGN SYSTEM
            Color Palette:
-           - YinMn Blue: #2E4C8C
-           - Old Lace: #FFF3E1
-           - Red: #FA2D1A
-           - Black: #1a1a1a
+           - Light Green: #F5FBE6
+           - Teal: #215E61
+           - Dark Navy: #233D4D
+           - Orange: #FE7F2D
            ======================================== */
         
         :root {
-            --blue: #2E4C8C;
-            --cream: #FFF3E1;
-            --red: #FA2D1A;
-            --black: #1a1a1a;
+            --blue: #215E61;
+            --cream: #F5FBE6;
+            --red: #FE7F2D;
+            --black: #233D4D;
             --white: #ffffff;
             --shadow-offset: 6px;
             --border-width: 3px;
@@ -60,8 +60,8 @@
             width: 100%;
             height: 100%;
             background-image: 
-                radial-gradient(circle at 20% 80%, rgba(250, 45, 26, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(46, 76, 140, 0.1) 0%, transparent 50%);
+                radial-gradient(circle at 20% 80%, rgba(254, 127, 45, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(33, 94, 97, 0.1) 0%, transparent 50%);
             z-index: 0;
         }
 
@@ -227,7 +227,7 @@
         }
 
         .btn-neo-primary:hover {
-            background: #e02615;
+            background: #e56c20;
             box-shadow: 6px 6px 0 var(--black);
             transform: translate(-2px, -2px);
             color: var(--white);

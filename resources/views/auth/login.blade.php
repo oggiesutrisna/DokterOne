@@ -16,17 +16,17 @@
         /* ========================================
            NEUBRUTALISM DESIGN SYSTEM
            Color Palette:
-           - YinMn Blue: #2E4C8C
-           - Old Lace: #FFF3E1
-           - Red: #FA2D1A
-           - Black: #1a1a1a
+           - Light Green: #F5FBE6
+           - Teal: #215E61
+           - Dark Navy: #233D4D
+           - Orange: #FE7F2D
            ======================================== */
         
         :root {
-            --blue: #2E4C8C;
-            --cream: #FFF3E1;
-            --red: #FA2D1A;
-            --black: #1a1a1a;
+            --blue: #215E61;
+            --cream: #F5FBE6;
+            --red: #FE7F2D;
+            --black: #233D4D;
             --white: #ffffff;
             --gray: #666666;
             --light-gray: #f5f5f5;
@@ -61,8 +61,8 @@
             width: 100%;
             height: 100%;
             background-image: 
-                radial-gradient(circle at 10% 90%, rgba(250, 45, 26, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 90% 10%, rgba(46, 76, 140, 0.08) 0%, transparent 40%);
+                radial-gradient(circle at 10% 90%, rgba(254, 127, 45, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 10%, rgba(33, 94, 97, 0.08) 0%, transparent 40%);
             z-index: 0;
         }
 
@@ -296,7 +296,7 @@
         }
 
         .btn-neo:hover {
-            background: #e02615;
+            background: #e56c20;
             box-shadow: 6px 6px 0 var(--black);
             transform: translate(-2px, -2px);
         }
@@ -638,9 +638,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/js/adminlte.min.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
 </body>
 </html>
