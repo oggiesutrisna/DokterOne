@@ -15,24 +15,6 @@
     </div>
   </div>
   <div class="stat-card">
-    <div class="stat-icon teal">
-      <i class="fas fa-user-md"></i>
-    </div>
-    <div class="stat-content">
-      <div class="stat-value">{{ \App\Models\Dokter::count() }}</div>
-      <div class="stat-label">Total Doctors</div>
-    </div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-icon green">
-      <i class="fas fa-user-nurse"></i>
-    </div>
-    <div class="stat-content">
-      <div class="stat-value">{{ \App\Models\Perawat::count() }}</div>
-      <div class="stat-label">Total Nurses</div>
-    </div>
-  </div>
-  <div class="stat-card">
     <div class="stat-icon yellow">
       <i class="fas fa-clipboard-list"></i>
     </div>
@@ -85,22 +67,6 @@
           <a href="{{ route('pasiens.index') }}" class="btn btn-secondary" style="flex-direction: column; padding: 1.25rem; height: auto;">
             <i class="fas fa-users" style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--primary);"></i>
             <span>Patients</span>
-          </a>
-          <a href="{{ route('dokters.index') }}" class="btn btn-secondary" style="flex-direction: column; padding: 1.25rem; height: auto;">
-            <i class="fas fa-user-md" style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--secondary);"></i>
-            <span>Doctors</span>
-          </a>
-          <a href="{{ route('perawats.index') }}" class="btn btn-secondary" style="flex-direction: column; padding: 1.25rem; height: auto;">
-            <i class="fas fa-user-nurse" style="font-size: 1.5rem; margin-bottom: 0.5rem; color: #c2185b;"></i>
-            <span>Nurses</span>
-          </a>
-          <a href="{{ route('antreans.index') }}" class="btn btn-secondary" style="flex-direction: column; padding: 1.25rem; height: auto;">
-            <i class="fas fa-clipboard-list" style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--warning);"></i>
-            <span>Queue</span>
-          </a>
-          <a href="{{ route('absensis.index') }}" class="btn btn-secondary" style="flex-direction: column; padding: 1.25rem; height: auto;">
-            <i class="fas fa-calendar-check" style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--info);"></i>
-            <span>Attendance</span>
           </a>
         </div>
       </div>

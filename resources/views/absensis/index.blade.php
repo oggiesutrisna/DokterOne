@@ -25,7 +25,7 @@
         </tr>
       </thead>
       <tbody>
-        @forelse($absensis as $absensi)
+        @foreach($absensis as $absensi)
         <tr>
           <td><span class="font-semibold">#{{ $absensi->id }}</span></td>
           <td>
@@ -64,20 +64,7 @@
             </div>
           </td>
         </tr>
-        @empty
-        <tr>
-          <td colspan="5">
-            <div class="empty-state">
-              <div class="empty-state-icon"><i class="fas fa-calendar-check"></i></div>
-              <div class="empty-state-title">No attendance records yet</div>
-              <div class="empty-state-text">Add your first attendance record</div>
-              <a href="{{ route('absensis.create') }}" class="btn btn-primary">
-                <i class="fas fa-plus"></i> Add Record
-              </a>
-            </div>
-          </td>
-        </tr>
-        @endforelse
+        @endforeach
       </tbody>
     </table>
   </div>
@@ -89,6 +76,9 @@
 $(document).ready(function() {
   $('#dataTable').DataTable({
     responsive: true,
+    language: {
+      emptyTable: 'No attendance records yet'
+    },
     order: [[2, 'desc']],
     columnDefs: [{ orderable: false, targets: -1 }]
   });

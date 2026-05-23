@@ -11,6 +11,7 @@
         "php": "^8.1",
         "ext-gd": "*",
         "barryvdh/laravel-dompdf": "^2.0",
+        "chillerlan/php-qrcode": "^6.0",
         "dompdf/dompdf": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^10.0",
@@ -59,6 +60,9 @@
     },
     "config": {
         "optimize-autoloader": true,
+        "platform": {
+            "php": "8.4.0"
+        },
         "preferred-install": "dist",
         "sort-packages": true
     },

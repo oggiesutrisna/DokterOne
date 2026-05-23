@@ -31,39 +31,9 @@
             <span class="sidebar-nav-badge">{{ \App\Models\Pasien::count() }}</span>
           </a>
         </li>
-        <li class="sidebar-nav-item">
-          <a href="{{ route('dokters.index') }}" class="sidebar-nav-link {{ request()->routeIs('dokters.*') ? 'active' : '' }}">
-            <i class="sidebar-nav-icon fas fa-user-md"></i>
-            <span>Dokter</span>
-          </a>
-        </li>
-        <li class="sidebar-nav-item">
-          <a href="{{ route('perawats.index') }}" class="sidebar-nav-link {{ request()->routeIs('perawats.*') ? 'active' : '' }}">
-            <i class="sidebar-nav-icon fas fa-user-nurse"></i>
-            <span>Perawat</span>
-          </a>
-        </li>
       </ul>
     </div>
 
-    <!-- Operations -->
-    <div class="sidebar-section">
-      <div class="sidebar-section-title">Operations</div>
-      <ul class="sidebar-nav">
-        <li class="sidebar-nav-item">
-          <a href="{{ route('absensis.index') }}" class="sidebar-nav-link {{ request()->routeIs('absensis.*') ? 'active' : '' }}">
-            <i class="sidebar-nav-icon fas fa-calendar-check"></i>
-            <span>Absensi</span>
-          </a>
-        </li>
-        <li class="sidebar-nav-item">
-          <a href="{{ route('antreans.index') }}" class="sidebar-nav-link {{ request()->routeIs('antreans.*') ? 'active' : '' }}">
-            <i class="sidebar-nav-icon fas fa-clipboard-list"></i>
-            <span>Antrean</span>
-          </a>
-        </li>
-      </ul>
-    </div>
   </nav>
 
   <!-- Footer -->

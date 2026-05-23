@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Perawat;
 use App\Http\Requests\StorePerawatRequest;
 use App\Http\Requests\UpdatePerawatRequest;
+use App\Models\Perawat;
 
 class PerawatController extends Controller
 {
@@ -14,6 +14,7 @@ class PerawatController extends Controller
     public function index()
     {
         $perawats = Perawat::latest()->paginate(10);
+
         return view('perawats.index', compact('perawats'));
     }
 

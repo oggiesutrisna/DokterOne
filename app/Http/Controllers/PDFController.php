@@ -13,14 +13,22 @@ class PDFController extends Controller
      */
     public function download(Pasien $pasien)
     {
+        $options = new \chillerlan\QRCode\QROptions([
+            'outputInterface' => \chillerlan\QRCode\Output\QRGdImagePNG::class,
+            'outputBase64' => true,
+            'scale' => 4,
+        ]);
+
+        $qrCode = (new \chillerlan\QRCode\QRCode($options))->render(route('pasiens.show', $pasien));
+
         // Generate PDF from Blade template
-        $pdf = Pdf::loadView('pdf.result', compact('pasien'));
-        
+        $pdf = Pdf::loadView('pdf.result', compact('pasien', 'qrCode'));
+
         // ... rest of code uses $pasien directly
-        
+
         // Set paper size and orientation
         $pdf->setPaper('a4', 'portrait');
-        
+
         // Optional: Set DomPDF options for better rendering
         $pdf->setOptions([
             'isHtml5ParserEnabled' => true,
@@ -29,13 +37,13 @@ class PDFController extends Controller
         ]);
 
         // If `results` folder didn't exist, create it
-        if (!File::exists(public_path('results'))) {
+        if (! File::exists(public_path('results'))) {
             File::makeDirectory(public_path('results'));
         }
 
         $fileName = "result-{$pasien->nama}[{$pasien->nomor_pid}].pdf";
         $filePath = public_path("results/{$fileName}");
-        
+
         // Save the PDF
         $pdf->save($filePath);
 
@@ -48,15 +56,22 @@ class PDFController extends Controller
      */
     public function preview(Pasien $pasien)
     {
+        $options = new \chillerlan\QRCode\QROptions([
+            'outputInterface' => \chillerlan\QRCode\Output\QRGdImagePNG::class,
+            'outputBase64' => true,
+            'scale' => 4,
+        ]);
+
+        $qrCode = (new \chillerlan\QRCode\QRCode($options))->render(route('pasiens.show', $pasien));
+
         // Generate PDF from Blade template
-        $pdf = Pdf::loadView('pdf.result', compact('pasien'));
-        
+        $pdf = Pdf::loadView('pdf.result', compact('pasien', 'qrCode'));
+
         // ... rest of code uses $pasien directly
 
-        
         // Set paper size and orientation
         $pdf->setPaper('a4', 'portrait');
-        
+
         // Optional: Set DomPDF options for better rendering
         $pdf->setOptions([
             'isHtml5ParserEnabled' => true,

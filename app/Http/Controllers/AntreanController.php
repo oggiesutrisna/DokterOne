@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Antrean;
 use App\Http\Requests\StoreAntreanRequest;
 use App\Http\Requests\UpdateAntreanRequest;
+use App\Models\Antrean;
 
 class AntreanController extends Controller
 {
@@ -14,6 +14,7 @@ class AntreanController extends Controller
     public function index()
     {
         $antreans = Antrean::with('pasien')->latest()->paginate(10);
+
         return view('antreans.index', compact('antreans'));
     }
 
@@ -23,6 +24,7 @@ class AntreanController extends Controller
     public function create()
     {
         $pasiens = \App\Models\Pasien::all();
+
         return view('antreans.create', compact('pasiens'));
     }
 
@@ -61,7 +63,7 @@ class AntreanController extends Controller
         }
 
         // Validate patient is selected before proceeding past step 1
-        if ($step >= 2 && !$selectedPasien) {
+        if ($step >= 2 && ! $selectedPasien) {
             return redirect()->route('antrean.wizard', ['step' => 1])
                 ->with('error', 'Please identify the patient first.');
         }
@@ -103,7 +105,7 @@ class AntreanController extends Controller
 
         return redirect()->route('antrean.wizard', [
             'step' => 5,
-            'antrean_id' => $antrean->id
+            'antrean_id' => $antrean->id,
         ])->with('success', 'Queue number reserved successfully!');
     }
 

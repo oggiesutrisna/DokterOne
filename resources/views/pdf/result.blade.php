@@ -12,31 +12,70 @@
             line-height: 1.4;
             color: #000;
             margin: 0;
-            padding: 30px 40px;
+            padding: 18px 34px;
+        }
+
+        .clinic-header {
+            width: 100%;
+            border-bottom: 2px solid #000;
+            padding-bottom: 8px;
+            margin-bottom: 10px;
+        }
+
+        .clinic-header-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .clinic-logo {
+            width: 52px;
+            height: 52px;
+            border: 2px solid #000;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 20pt;
+            font-weight: bold;
+        }
+
+        .clinic-info {
+            padding-left: 14px;
+            vertical-align: middle;
+        }
+
+        .clinic-name {
+            font-size: 15pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin: 0 0 3px 0;
+        }
+
+        .clinic-meta {
+            font-size: 9pt;
+            margin: 0;
         }
 
         .date-top {
             text-align: right;
-            margin-bottom: 25px;
-            font-size: 12pt;
+            margin-bottom: 12px;
+            font-size: 11pt;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
         }
 
         .header h1 {
-            font-size: 16pt;
+            font-size: 15pt;
             font-weight: normal;
             font-style: italic;
-            margin: 0 0 8px 0;
+            margin: 0 0 4px 0;
         }
 
         .document-number {
             text-align: center;
-            margin-bottom: 25px;
-            font-size: 12pt;
+            margin-bottom: 12px;
+            font-size: 11pt;
         }
 
         .document-number span {
@@ -44,25 +83,25 @@
         }
 
         .intro {
-            margin-bottom: 20px;
+            margin-bottom: 12px;
         }
 
         .intro p {
-            margin: 0 0 8px 0;
+            margin: 0 0 5px 0;
         }
 
         /* Patient Info Table */
         .info-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 25px;
+            margin-bottom: 14px;
         }
 
         .info-table td {
             border: 1px solid #000;
-            padding: 8px 10px;
+            padding: 5px 8px;
             vertical-align: middle;
-            font-size: 11pt;
+            font-size: 10pt;
         }
 
         .info-table .label {
@@ -78,8 +117,8 @@
         /* Results Section */
         .results-header {
             font-weight: bold;
-            margin-bottom: 12px;
-            font-size: 12pt;
+            margin-bottom: 7px;
+            font-size: 11pt;
         }
 
         .results-table {
@@ -91,9 +130,9 @@
         .results-table th,
         .results-table td {
             border: 1px solid #000;
-            padding: 8px 10px;
+            padding: 5px 8px;
             text-align: center;
-            font-size: 11pt;
+            font-size: 10pt;
         }
 
         .results-table th {
@@ -104,20 +143,20 @@
         .test-description {
             border: 1px solid #000;
             border-top: none;
-            padding: 10px;
-            margin-bottom: 25px;
-            font-size: 10pt;
+            padding: 6px 8px;
+            margin-bottom: 12px;
+            font-size: 9pt;
         }
 
         /* Recommendation Section */
         .recommendation {
-            margin-bottom: 30px;
+            margin-bottom: 14px;
         }
 
         .recommendation h3 {
             font-weight: bold;
-            margin: 0 0 12px 0;
-            font-size: 12pt;
+            margin: 0 0 6px 0;
+            font-size: 11pt;
         }
 
         .recommendation ul {
@@ -126,23 +165,47 @@
         }
 
         .recommendation li {
-            margin-bottom: 6px;
-            font-size: 11pt;
+            margin-bottom: 3px;
+            font-size: 10pt;
         }
 
         /* Signature Section */
         .signature {
-            margin-top: 40px;
+            margin-top: 16px;
+            width: 100%;
+            text-align: right;
         }
 
         .signature p {
             margin: 0 0 5px 0;
             font-size: 11pt;
         }
+
+        .signature-space {
+            height: 38px;
+        }
+
+        .signature-name {
+            font-weight: bold;
+            text-decoration: underline;
+        }
     </style>
 </head>
 
 <body>
+    <div class="clinic-header">
+        <table class="clinic-header-table">
+            <tr>
+                <td class="clinic-logo">U</td>
+                <td class="clinic-info">
+                    <p class="clinic-name">Unicare Clinic</p>
+                    <p class="clinic-meta">Healthcare and Medical Services</p>
+                    <p class="clinic-meta">Certificate of COVID-19 Testing</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+
     <div class="date-top">
         {{ \Carbon\Carbon::parse($pasien->sampling_time)->format('F j, Y, g:i A') }}
     </div>
@@ -157,7 +220,7 @@
 
     <div class="intro">
         <p>To whom it may concern</p>
-        <p>dr. Of Unicare Clinic on the date states above have performed the Swab Antigen test, using sample obtained
+        <p>Lead doctoral dr. Of Unicare Clinic on the date states above have performed the Swab Antigen test, using sample obtained
             from
             the individual name below:</p>
     </div>
@@ -221,11 +284,27 @@
         </ul>
     </div>
 
-    <div class="signature">
-        <p>Bali,</p>
-        <p>Attending Physician Name, Signature and Stamp</p>
-        <p>Attending Physician</p>
-    </div>
+    <table style="width: 100%; margin-top: 20px; border-collapse: collapse; border: none !important;">
+        <tr>
+            <td style="width: 50%; text-align: left; vertical-align: bottom; border: none !important; padding: 0;">
+                @if(isset($qrCode))
+                    <div style="margin-bottom: 5px;">
+                        <img src="{{ $qrCode }}" alt="QR Code" style="width: 100px; height: 100px; border: none;">
+                    </div>
+                    <p style="margin: 0; font-size: 8pt; color: #555; font-style: italic; font-family: 'Times New Roman', Times, serif;">Scan to verify document validity</p>
+                @endif
+            </td>
+            <td style="width: 50%; text-align: right; vertical-align: bottom; border: none !important; padding: 0;">
+                <div class="signature" style="margin-top: 0;">
+                    <p>Bali, {{ \Carbon\Carbon::parse($pasien->sampling_time)->format('F j, Y') }}</p>
+                    <p>Attending Physician</p>
+                    <div class="signature-space"></div>
+                    <p class="signature-name">dr. Nyoman Gita Gunawan</p>
+                    <p>Signature and Stamp</p>
+                </div>
+            </td>
+        </tr>
+    </table>
 </body>
 
 </html>

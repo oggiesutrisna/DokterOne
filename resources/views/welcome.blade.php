@@ -23,7 +23,7 @@
            - Dark Navy: #233D4D
            - Orange: #FE7F2D
            ======================================== */
-        
+
         :root {
             --blue: #215E61;
             --cream: #F5FBE6;
@@ -59,7 +59,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 radial-gradient(circle at 20% 80%, rgba(254, 127, 45, 0.1) 0%, transparent 50%),
                 radial-gradient(circle at 80% 20%, rgba(33, 94, 97, 0.1) 0%, transparent 50%);
             z-index: 0;
@@ -149,7 +149,7 @@
 
         /* Logo Icon */
         .logo-container {
-            display: inline-flex;
+            display: flex;
             align-items: center;
             justify-content: center;
             width: 90px;
@@ -158,9 +158,17 @@
             border: var(--border-width) solid var(--black);
             border-radius: var(--radius);
             box-shadow: 4px 4px 0 var(--black);
-            margin-bottom: 1.5rem;
+            margin: 0 auto 1.5rem;
             color: var(--white);
             font-size: 2.5rem;
+            line-height: 1;
+        }
+
+        .logo-container svg,
+        .logo-container i {
+            display: block;
+            width: 1em;
+            height: 1em;
         }
 
         /* Badge */
@@ -189,6 +197,8 @@
             color: var(--black);
             margin-bottom: 0.5rem;
             letter-spacing: -0.02em;
+            line-height: 1.05;
+            text-align: center;
         }
 
         .title span {
@@ -520,10 +530,10 @@
             </div>
 
             <!-- Secondary Button -->
-            <a href="{{ route('login') }}" class="btn-neo btn-neo-secondary">
-                <i class="fas fa-user-plus"></i>
-                <span>Register as Patient</span>
-            </a>
+{{--            <a href="{{ route('login') }}" class="btn-neo btn-neo-secondary">--}}
+{{--                <i class="fas fa-user-plus"></i>--}}
+{{--                <span>Register as Patient</span>--}}
+{{--            </a>--}}
 
             <!-- Features -->
             <div class="features">

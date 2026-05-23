@@ -19,7 +19,7 @@ return new class extends Migration
         // Generate slugs for existing records
         $pasiens = \App\Models\Pasien::all();
         foreach ($pasiens as $pasien) {
-            $pasien->slug = Str::slug($pasien->nama . '-' . $pasien->nomor_pid);
+            $pasien->slug = Str::slug($pasien->nama.'-'.$pasien->nomor_pid);
             $pasien->save();
         }
     }

@@ -24,7 +24,7 @@
         </tr>
       </thead>
       <tbody>
-        @forelse($dokters as $dokter)
+        @foreach($dokters as $dokter)
         <tr>
           <td><span class="font-semibold">#{{ $dokter->id }}</span></td>
           <td>
@@ -53,20 +53,7 @@
             </div>
           </td>
         </tr>
-        @empty
-        <tr>
-          <td colspan="4">
-            <div class="empty-state">
-              <div class="empty-state-icon"><i class="fas fa-user-md"></i></div>
-              <div class="empty-state-title">No doctors yet</div>
-              <div class="empty-state-text">Add your first doctor to get started</div>
-              <a href="{{ route('dokters.create') }}" class="btn btn-primary">
-                <i class="fas fa-plus"></i> Add Doctor
-              </a>
-            </div>
-          </td>
-        </tr>
-        @endforelse
+        @endforeach
       </tbody>
     </table>
   </div>
@@ -78,6 +65,9 @@
 $(document).ready(function() {
   $('#dataTable').DataTable({
     responsive: true,
+    language: {
+      emptyTable: 'No doctors yet'
+    },
     columnDefs: [{ orderable: false, targets: -1 }]
   });
 });

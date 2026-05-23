@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Dokter;
 use App\Http\Requests\StoreDokterRequest;
 use App\Http\Requests\UpdateDokterRequest;
+use App\Models\Dokter;
 
 class DokterController extends Controller
 {
@@ -14,6 +14,7 @@ class DokterController extends Controller
     public function index()
     {
         $dokters = Dokter::latest()->paginate(10);
+
         return view('dokters.index', compact('dokters'));
     }
 

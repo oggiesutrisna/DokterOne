@@ -24,7 +24,7 @@
         </tr>
       </thead>
       <tbody>
-        @forelse($perawats as $perawat)
+        @foreach($perawats as $perawat)
         <tr>
           <td><span class="font-semibold">#{{ $perawat->id }}</span></td>
           <td>
@@ -53,20 +53,7 @@
             </div>
           </td>
         </tr>
-        @empty
-        <tr>
-          <td colspan="4">
-            <div class="empty-state">
-              <div class="empty-state-icon"><i class="fas fa-user-nurse"></i></div>
-              <div class="empty-state-title">No nurses yet</div>
-              <div class="empty-state-text">Add your first nurse to get started</div>
-              <a href="{{ route('perawats.create') }}" class="btn btn-primary">
-                <i class="fas fa-plus"></i> Add Nurse
-              </a>
-            </div>
-          </td>
-        </tr>
-        @endforelse
+        @endforeach
       </tbody>
     </table>
   </div>
@@ -78,6 +65,9 @@
 $(document).ready(function() {
   $('#dataTable').DataTable({
     responsive: true,
+    language: {
+      emptyTable: 'No nurses yet'
+    },
     columnDefs: [{ orderable: false, targets: -1 }]
   });
 });

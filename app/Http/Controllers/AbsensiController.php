@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Absensi;
 use App\Http\Requests\StoreAbsensiRequest;
 use App\Http\Requests\UpdateAbsensiRequest;
+use App\Models\Absensi;
 
 class AbsensiController extends Controller
 {
@@ -14,6 +14,7 @@ class AbsensiController extends Controller
     public function index()
     {
         $absensis = Absensi::with('user')->latest()->paginate(10);
+
         return view('absensis.index', compact('absensis'));
     }
 
@@ -23,6 +24,7 @@ class AbsensiController extends Controller
     public function create()
     {
         $users = \App\Models\User::all();
+
         return view('absensis.create', compact('users'));
     }
 

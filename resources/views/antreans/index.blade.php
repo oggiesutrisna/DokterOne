@@ -24,7 +24,7 @@
         </tr>
       </thead>
       <tbody>
-        @forelse($antreans as $antrean)
+        @foreach($antreans as $antrean)
         <tr>
           <td>
             <span style="
@@ -65,20 +65,7 @@
             </div>
           </td>
         </tr>
-        @empty
-        <tr>
-          <td colspan="4">
-            <div class="empty-state">
-              <div class="empty-state-icon"><i class="fas fa-clipboard-list"></i></div>
-              <div class="empty-state-title">No queue records yet</div>
-              <div class="empty-state-text">Add your first queue entry</div>
-              <a href="{{ route('antreans.create') }}" class="btn btn-primary">
-                <i class="fas fa-plus"></i> Add Queue
-              </a>
-            </div>
-          </td>
-        </tr>
-        @endforelse
+        @endforeach
       </tbody>
     </table>
   </div>
@@ -90,6 +77,9 @@
 $(document).ready(function() {
   $('#dataTable').DataTable({
     responsive: true,
+    language: {
+      emptyTable: 'No queue records yet'
+    },
     columnDefs: [{ orderable: false, targets: -1 }]
   });
 });

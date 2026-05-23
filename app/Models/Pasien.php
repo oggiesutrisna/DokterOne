@@ -57,7 +57,7 @@ class Pasien extends Model
      */
     protected static function generateUniqueSlug($nama, $nomor_pid, $excludeId = null)
     {
-        $baseSlug = Str::slug($nama . '-' . $nomor_pid);
+        $baseSlug = Str::slug($nama.'-'.$nomor_pid);
         $slug = $baseSlug;
         $counter = 1;
 
@@ -67,7 +67,7 @@ class Pasien extends Model
         }
 
         while ($query->exists()) {
-            $slug = $baseSlug . '-' . $counter;
+            $slug = $baseSlug.'-'.$counter;
             $counter++;
             $query = static::where('slug', $slug);
             if ($excludeId) {
