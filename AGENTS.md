@@ -61,7 +61,7 @@ use App\Models\Pasien;
 use App\Http\Requests\StorePasienRequest;
 ```
 
-Order: namespace → external imports → internal imports → class definition
+Order: namespace -> external imports -> internal imports -> class definition
 
 ## Error Handling
 
