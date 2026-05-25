@@ -1,72 +1,115 @@
-<p align="center">
-  <a href="#">
-    <img src="https://user-images.githubusercontent.com/40566790/125743825-6fabea4e-d50f-490f-bedd-2f1088718483.png" width="300" alt="DokterOne Logo">
-  </a>
-</p>
+# DokterOne
 
-# DokterOne - Clinic & Patient Management System
+DokterOne is a Laravel-based clinic and patient management application for managing patient records, generating COVID-19 test certificates, and verifying certificate authenticity through QR codes.
 
-DokterOne is a comprehensive web-based application designed to streamline clinic operations, patient management, and COVID-19 result verification. Built with **Laravel 10**, it offers a modern, verifying system for clinics to manage patient data and issue secure, verifiable test certificates.
+## Features
 
-## 🚀 Key Features
+- Patient management with create, read, update, and delete workflows.
+- COVID-19 antigen and PCR certificate generation.
+- Printable A4 PDF output powered by DomPDF.
+- QR-code based certificate verification.
+- Slug-based patient URLs for cleaner public links.
+- Authentication and staff-facing dashboard screens.
 
-*   **Patient Management**: Complete CRUD system for patient data.
-*   **Result Verification**: Generate official COVID-19 test certificates (Antigen/PCR).
-*   **PDF Generation**: High-quality, printable A4 PDF certificates using DomPDF.
-*   **QR Code System**: Instant verification of certificates via QR code scanning.
-*   **Secure Routing**: Slug-based URLs (e.g., `/pasiens/name-id`) for privacy and professionalism.
-*   **Dashboard**: Neubrutalism-styled responsive dashboard with statistics.
-*   **User Management**: Role-based access for administrators and staff.
+## Tech Stack
 
-## 🛠️ Tech Stack
+- PHP 8.1+
+- Laravel 10
+- MySQL
+- Laravel UI
+- Blade templates
+- Bootstrap 4
+- jQuery
+- Laravel Mix
+- DomPDF
+- chillerlan/php-qrcode
 
-*   **Framework**: Laravel 10
-*   **Language**: PHP 8.1+
-*   **Database**: MySQL
-*   **PDF Engine**: DomPDF
-*   **Frontend**: Blade, Neubrutalism CSS, FontAwesome
+## Requirements
 
-## 📦 Installation
+- PHP 8.1 or newer with the GD extension enabled.
+- Composer.
+- Node.js and npm.
+- MySQL or another Laravel-supported database.
 
-1.  **Clone the repository**
-    ```bash
-    git clone https://github.com/oggiesutrisna/DokterOne.git
-    cd DokterOne
-    ```
+## Installation
 
-2.  **Install PHP Dependencies**
-    ```bash
-    composer install
-    ```
+1. Clone the repository:
 
-3.  **Environment Setup**
-    ```bash
-    cp .env.example .env
-    php artisan key:generate
-    ```
+   ```bash
+   git clone https://github.com/oggiesutrisna/DokterOne.git
+   cd DokterOne
+   ```
 
-4.  **Database Setup**
-    *   Create a database (e.g., `dokterone`).
-    *   Update `.env` with your database credentials.
-    *   Run migrations and seeders:
-    ```bash
-    php artisan migrate:fresh --seed
-    ```
+2. Install PHP dependencies:
 
-5.  **Run the Application**
-    ```bash
-    php artisan serve
-    ```
+   ```bash
+   composer install
+   ```
 
-## 🔑 Default Credentials
+3. Install JavaScript dependencies:
 
-After seeding the database, you can log in with:
-*   **Username**: `admin`
-*   **Password**: `password`
+   ```bash
+   npm install
+   ```
 
-## 📄 License
+4. Create the environment file and application key:
+
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+
+5. Configure the database connection in `.env`.
+
+6. Run migrations and seeders:
+
+   ```bash
+   php artisan migrate:fresh --seed
+   ```
+
+7. Build frontend assets:
+
+   ```bash
+   npm run dev
+   ```
+
+8. Start the local server:
+
+   ```bash
+   php artisan serve
+   ```
+
+## Default Credentials
+
+After seeding the database, sign in with:
+
+- Username: `admin`
+- Password: `password`
+
+## Common Commands
+
+```bash
+php artisan test
+./vendor/bin/pint
+npm run dev
+npm run watch
+npm run production
+```
+
+## Project Structure
+
+- `app/Http/Controllers/` - Web controllers.
+- `app/Http/Requests/` - Form request validation.
+- `app/Models/` - Eloquent models.
+- `database/migrations/` - Database schema changes.
+- `database/seeders/` - Seed data.
+- `resources/views/` - Blade templates.
+- `routes/web.php` - Web routes.
+- `tests/Feature/` - Feature tests.
+- `tests/Unit/` - Unit tests.
+
+## License
 
 DokterOne is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
----
-Built with ❤️ by [Oggie Sutrisna](https://twitter.com/oggiesutrisna)
+Built by [Oggie Sutrisna](https://twitter.com/oggiesutrisna).
